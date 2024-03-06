@@ -1,0 +1,29 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Run Chrome",
+            "url" : "http://localhost:3000",
+            "webRoot": "${workspaceFolder}\\snipsync"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Run backend",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\BackEnd\\backend.js",
+            "envFile": "${workspaceFolder}\\BackEnd\\config.env"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "FrontEnd/BackEnd",
+            "configurations": ["Run Chrome", "Run backend"],
+            "stopAll": true
+        }
+    ]
+}
