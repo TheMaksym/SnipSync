@@ -4,7 +4,7 @@
         {
             "type": "chrome",
             "request": "launch",
-            "name": "Run Chrome",
+            "name": "Run frontend",
             "url" : "http://localhost:3000",
             "webRoot": "${workspaceFolder}\\snipsync"
         },
@@ -22,7 +22,7 @@
     "compounds": [
         {
             "name": "FrontEnd/BackEnd",
-            "configurations": ["Run Chrome", "Run backend"],
+            "configurations": ["Run frontend", "Run backend"],
             "stopAll": true
         }
     ]
