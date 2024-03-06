@@ -21,6 +21,6 @@ try {
   console.error(err);
 }
 
-let db = client.db("TestDB");
+let db = client.db("SnipSync");
 
 export default db;

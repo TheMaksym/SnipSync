@@ -8,8 +8,8 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\snipsync\\BackEnd\\backend.js",
-            "envFile": "${workspaceFolder}\\snipsync\\BackEnd\\config.env"
+            "program": "${workspaceFolder}\\BackEnd\\backend.js",
+            "envFile": "${workspaceFolder}\\BackEnd\\config.env"
         }
     ]
 }

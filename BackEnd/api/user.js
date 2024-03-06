@@ -6,23 +6,26 @@ import db from "../db/connection.js";
 // This help convert the id from string to ObjectId for the _id.
 import { ObjectId } from "mongodb";
 
+//This will be used for hashing passwords
+import crypto from "crypto";
+
 // router is an instance of the express router.
 // We use it to define our routes.
 // The router will be added as a middleware and will take control of requests starting with path /record.
 const router = express.Router();
-
-// This section will help you get a list of all the records.
+const secret = "AnnieIsTheBestTA"
+// This section will list all user info
 router.get("/", async (req, res) => {
-  console.log("Hit")
-  let collection = await db.collection("TestCollection");
+  let collection = await db.collection("User");
   let results = await collection.find({}).toArray();
   res.send(results).status(200);
 });
 
 // This section will help you get a single record by id
 router.get("/:id", async (req, res) => {
-  let collection = await db.collection("records");
+  let collection = await db.collection("User");
   let query = { _id: new ObjectId(req.params.id) };
+  console.log(req.params.id);
   let result = await collection.findOne(query);
 
   if (!result) res.send("Not found").status(404);
@@ -33,11 +36,13 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     let newDocument = {
-      name: req.body.name,
-      position: req.body.position,
-      level: req.body.level,
+      username: req.body.username,
+      password: crypto.createHmac('sha256', secret)
+                .update(req.body.password)
+                .digest('hex'),
+      accountName: req.body.accountName,
     };
-    let collection = await db.collection("records");
+    let collection = await db.collection("User");
     let result = await collection.insertOne(newDocument);
     res.send(result).status(204);
   } catch (err) {
@@ -52,13 +57,12 @@ router.patch("/:id", async (req, res) => {
     const query = { _id: new ObjectId(req.params.id) };
     const updates = {
       $set: {
-        name: req.body.name,
-        position: req.body.position,
-        level: req.body.level,
+          username: req.body.username,
+          accountName: req.body.accountName
       },
     };
 
-    let collection = await db.collection("records");
+    let collection = await db.collection("User");
     let result = await collection.updateOne(query, updates);
     res.send(result).status(200);
   } catch (err) {
@@ -72,7 +76,7 @@ router.delete("/:id", async (req, res) => {
   try {
     const query = { _id: new ObjectId(req.params.id) };
 
-    const collection = db.collection("records");
+    const collection = db.collection("User");
     let result = await collection.deleteOne(query);
 
     res.send(result).status(200);
