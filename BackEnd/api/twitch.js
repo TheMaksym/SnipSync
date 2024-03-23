@@ -1,0 +1,37 @@
+import express from "express";
+import db from "../db/connection.js";
+import axios from "axios"
+//api call on http://localhost:5050/twitch/
+
+const router = express.Router();
+
+
+router.get("/", async (req1, res1) => {
+
+    const apiUrl = "https://id.twitch.tv/oauth2/token";
+    
+    const headers = {
+        'Content-Type' :'application/x-www-form-urlencoded'
+    }
+
+    const requestBody = {
+        'client_id' : process.env.TWITCH_CLIENT_ID,
+        'client_secret' : process.env.TWITCH_SECRET,
+        'grant_type' : 'client_credentials'
+    }
+
+    axios.post(apiUrl, requestBody, {headers})
+        .then(response =>{
+            console.log("RESPONSE:");
+            console.log(response.data);
+        })
+        .catch(error =>{
+            console.log("ERROR: ");
+            console.log(error);
+        })
+
+    res1.send("Recieved").status(200);
+});
+
+
+  export default router;
