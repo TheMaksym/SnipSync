@@ -1,8 +1,12 @@
+import styles from "../page.module.css";
+
 
 export function Page1() {
     return (
-        <>
-        <h1>This is page 1</h1>
-        </>
+        <main className={styles.main}>
+            <div className={styles.description}>
+                <h1>Page1</h1>
+            </div>
+        </main>
     )
 }
