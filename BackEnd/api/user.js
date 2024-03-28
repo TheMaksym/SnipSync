@@ -8,6 +8,7 @@ import { ObjectId } from "mongodb";
 
 //This will be used for hashing passwords
 import crypto from "crypto";
+import { isBuffer } from "util";
 
 // router is an instance of the express router.
 // We use it to define our routes.
@@ -25,9 +26,7 @@ router.get("/", async (req, res) => {
 router.get("/Single/:username", async (req, res) => {
   let collection = await db.collection("User");
   let query = { username: req.params.username };
-  console.log(req.params.id);
   let result = await collection.findOne(query);
-
   if (!result) res.send("Not found").status(404);
   else res.send(result).status(200);
 });
@@ -116,6 +115,40 @@ router.delete("/Single/:username", async (req, res) => {
   }
 });
 
+router.patch("/Single/Twitch/:username", async (req, res) => {
+  try {
+    const query = { username: req.params.username };
+    const updates = {
+      $set: {
+          twitch_id: req.body.twitch_id
+      },
+    };
 
+    let collection = await db.collection("User");
+    let result = await collection.updateOne(query, updates);
+    res.send(result).status(200);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error updating record");
+  }
+});
+
+router.get("/Single/Twitch/:username", async (req, res) => {
+  try {
+    const query = { username: req.params.username };
+
+    let collection = await db.collection("User");
+    let result = await collection.findOne(query);
+    if(result.twitch_id !== undefined){
+      res.send(result.twitch_id).status(200);
+    }
+    else{
+      res.status(400).send("MissingTwitchID");
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error finding record");
+  }
+});
 
 export default router;

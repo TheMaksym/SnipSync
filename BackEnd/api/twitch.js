@@ -6,7 +6,7 @@ import axios from "axios"
 const router = express.Router();
 
 
-router.get("/", async (req1, res1) => {
+router.get("/", async (req, res) => {
 
     const apiUrl = "https://id.twitch.tv/oauth2/token";
     
@@ -30,8 +30,14 @@ router.get("/", async (req1, res1) => {
             console.log(error);
         })
 
-    res1.send("Recieved").status(200);
+    res.send("Recieved").status(200);
 });
 
+router.get("/OAuth/ProvideToken", async(req, res) => {
+    const url = "https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=" + process.env.TWITCH_CLIENT_ID + "&redirect_uri=http://localhost:3000/&scope=user%3Aread%3Afollows";
+    res.send(url).status(200);
+})
 
-  export default router;
+
+
+export default router;
