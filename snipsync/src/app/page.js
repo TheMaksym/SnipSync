@@ -8,52 +8,27 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <div className={styles.description}>
-        <p1>Hello World</p1>
-        
-        <form>
-          <label>
-            <div>
-              Username:
-              <input type="text" name="username" />
-            </div>
-            <div>
-              Password:
-              <input type="text" name="password" />
-            </div>
-            <div>
-            Account Name:
-            <input type="text" name="accountName" />
-            </div>
-          </label>
-          <div>
-          <input type="button" value="Create Account" />
+        <Image
+          src="/images/Logo.png" 
+          alt="Logo"
+          width={100} 
+          height={100}
+        />
+        <form className={styles.form}>
+          <div className={styles.inputGroup}>
+            <label htmlFor="username">Username:</label>
+            <input type="text" id="username" name="username" />
           </div>
-          <div>
-          <input type="button" value="Sign in" onClick={() => App()} />
+          <div className={styles.inputGroup}>
+            <label htmlFor="password">Password:</label>
+            <input type="password" id="password" name="password" />
+          </div>
+          <div className={styles.buttons}>
+            <input type="submit" value="Sign In" />
+            <input type="button" value="Create Account" />
           </div>
         </form>
-        
-        <p1>The value is {App()} </p1>
-        
       </div>
     </main>
   );
-}
-
-function App(){
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    fetch('http://localhost:5050/user/')
-      .then(response => response.json())
-      .then(json => setData(json))
-      .catch(error => console.error(error));
-  }, []);
-
-  return (
-    <div>
-      {data ? <pre>{JSON.stringify(data, null, 2)}</pre> : 'Loading...'}
-    </div>
-  );
-
 }
