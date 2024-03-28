@@ -6,7 +6,6 @@ import youtube from "./api/youtube.js";
 
 const PORT = process.env.PORT || 5050;
 const app = express();
-const youtubeAPIKey = "AIzaSyAk5p9ZqHTXeXUGGWTpN4F9tJzKYaugm7s"
 
 app.use(cors());
 app.use(express.json());

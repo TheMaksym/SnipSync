@@ -3,36 +3,43 @@ import db from "../db/connection.js";
 import axios from "axios"
 //api call on http://localhost:5050/youtube/
 //Used to fetch data and get console input
-import fetch from "node-fetch";
 import readline from 'readline';
 
 const router = express.Router();
 
-
-router.get("/search/", async (req, res) => {
+//Top functions do not need OAuth Authentication
+router.get("/Search/", async (req, res) => {
     const searchString = req.query.search; // Assuming the search string is passed as a query parameter
     if (!searchString) {
         return res.status(400).send('Search string is required');
     }
 
     const youtubeAPIKey = process.env.YOUTUBE_API_KEY;
-    const url = `https://www.googleapis.com/youtube/v3/search?key=${youtubeAPIKey}&q=${encodeURIComponent(searchString)}&type=video&part=snippet`;
-    try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`Error fetching data: ${response.statusText}`);
-        }
-        const data = await response.json();
-        console.log('Youtube Fetch Success :):');
-        console.log(JSON.stringify(data, null, 2)); 
-        res.json(data); // Send the data back to the client
-    } catch (error) {
-        console.error('Youtube Fetch FAILED :(');
-        res.status(500).send('Failed to fetch YouTube search results');
+    const apiUrl = "https://www.googleapis.com/youtube/v3/search";
+
+    const params = {
+        key: youtubeAPIKey,
+        q: searchString,
+        type: 'video',
+        part: 'snippet',
     }
+
+    axios.get(apiUrl, { params })
+        .then(response => {
+            console.log("RESPONSE:");
+            console.log(response.data);
+            res.json(response.data); // Send the YouTube data back to the client
+        })
+        .catch(error => {
+            console.log("ERROR: ");
+            console.error(error);
+            res.status(500).send('Out of tokens bozo🤣🤣🤣');
+        });
 });
 
-router.get("/OAuth/Signin", async(req, res) => {
+
+//Bottom functions need OAuth Authentication
+router.get("/User/Signin", async(req, res) => {
     const oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
 
     // Parameters to pass to OAuth 2.0 endpoint
@@ -56,5 +63,32 @@ router.get("/OAuth/Signin", async(req, res) => {
     res.redirect(authUrl);
 })
 
+router.get("User/Subscriptions/", async (req, res) => {
+    const searchString = req.query.search; // Assuming the search string is passed as a query parameter
+    if (!searchString) {
+        return res.status(400).send('Search string is required');
+    }
+
+    const youtubeAPIKey = process.env.YOUTUBE_API_KEY;
+    const apiUrl = "https://www.googleapis.com/youtube/v3/subscriptions";
+
+    const params = {
+        key: youtubeAPIKey,
+        mine: true,
+        part: 'snippet',
+    }
+
+    axios.get(apiUrl, { params })
+        .then(response => {
+            console.log("RESPONSE:");
+            console.log(response.data);
+            res.json(response.data); // Send the YouTube data back to the client
+        })
+        .catch(error => {
+            console.log("ERROR: ");
+            console.error(error);
+            res.status(500).send('Youtube Search API Error');
+        });
+});
 
 export default router;
