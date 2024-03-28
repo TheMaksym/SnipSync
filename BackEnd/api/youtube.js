@@ -64,7 +64,7 @@ router.get("/User/Signin", async(req, res) => {
 })
 
 router.get("User/Subscriptions/", async (req, res) => {
-    const searchString = req.query.search; // Assuming the search string is passed as a query parameter
+    const user_token = req.query.token; // Assuming the search string is passed as a query parameter
     if (!searchString) {
         return res.status(400).send('Search string is required');
     }
@@ -73,7 +73,7 @@ router.get("User/Subscriptions/", async (req, res) => {
     const apiUrl = "https://www.googleapis.com/youtube/v3/subscriptions";
 
     const params = {
-        key: youtubeAPIKey,
+        access_token: user_token,
         mine: true,
         part: 'snippet',
     }
