@@ -1,40 +1,14 @@
 
-import styles from "./page.module.css";
+
 import React, { useState, useEffect } from 'react';
 
 export function Home() {
     return (
-        <main className={styles.main}>
-      <div className={styles.description}>
-        <p1>Hello World</p1>
+        <>
+          <p1>Hello World</p1>
+        </>
         
-        <form>
-          <label>
-            <div>
-              Username:
-              <input type="text" name="username" />
-            </div>
-            <div>
-              Password:
-              <input type="text" name="password" />
-            </div>
-            <div>
-            Account Name:
-            <input type="text" name="accountName" />
-            </div>
-          </label>
-          <div>
-          <input type="button" value="Create Account" />
-          </div>
-          <div>
-          <input type="button" value="Sign in" onClick={() => App()} />
-          </div>
-        </form>
         
-        <p1>The value is {App()} </p1>
-        
-      </div>
-    </main>
     );
 }
 
