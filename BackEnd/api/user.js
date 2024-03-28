@@ -8,6 +8,7 @@ import { ObjectId } from "mongodb";
 
 //This will be used for hashing passwords
 import crypto from "crypto";
+import { isBuffer } from "util";
 
 // router is an instance of the express router.
 // We use it to define our routes.
@@ -21,19 +22,36 @@ router.get("/", async (req, res) => {
   res.send(results).status(200);
 });
 
-// This section will help you get a single record by id
-router.get("/:id", async (req, res) => {
+// This section will help you get a single record by username
+router.get("/Single/:username", async (req, res) => {
   let collection = await db.collection("User");
-  let query = { _id: new ObjectId(req.params.id) };
-  console.log(req.params.id);
+  let query = { username: req.params.username };
   let result = await collection.findOne(query);
-
   if (!result) res.send("Not found").status(404);
   else res.send(result).status(200);
 });
 
+router.get("/validate/", async(req, res) => {
+  try{
+    
+    let collection = await db.collection("User"); 
+    let checkQuery = {username : req.body.username};
+    let checkName = await collection.findOne(checkQuery);
+    if(req.body.password == checkName.password){
+      res.status(200).send("VALIDATED");
+    }
+    else{
+      res.status(403).send("DENIED");
+    }
+  }
+  catch (err) {
+    console.error(err);
+    res.status(500).send("Error adding record");
+  }
+});
+
 // This section will help you create a new record.
-router.post("/", async (req, res) => {
+router.post("/Create/", async (req, res) => {
   try {
     let newDocument = {
       username: req.body.username,
@@ -42,7 +60,18 @@ router.post("/", async (req, res) => {
                 .digest('hex'),
       accountName: req.body.accountName,
     };
+    
+
     let collection = await db.collection("User");
+
+    let checkQuery = {username : req.body.username};
+    let checkName = await collection.findOne(checkQuery);
+    if(checkName){
+      res.status(403).send("Username exists already");
+      return;
+    }
+
+
     let result = await collection.insertOne(newDocument);
     res.send(result).status(204);
   } catch (err) {
@@ -52,12 +81,12 @@ router.post("/", async (req, res) => {
 });
 
 // This section will help you update a record by id.
-router.patch("/:id", async (req, res) => {
+router.patch("/Single/:username", async (req, res) => {
   try {
-    const query = { _id: new ObjectId(req.params.id) };
+    const query = { username: req.params.username };
     const updates = {
       $set: {
-          username: req.body.username,
+          password : req.body.password,
           accountName: req.body.accountName
       },
     };
@@ -72,9 +101,9 @@ router.patch("/:id", async (req, res) => {
 });
 
 // This section will help you delete a record
-router.delete("/:id", async (req, res) => {
+router.delete("/Single/:username", async (req, res) => {
   try {
-    const query = { _id: new ObjectId(req.params.id) };
+    const query = { username : req.params.username };
 
     const collection = db.collection("User");
     let result = await collection.deleteOne(query);
@@ -83,6 +112,42 @@ router.delete("/:id", async (req, res) => {
   } catch (err) {
     console.error(err);
     res.status(500).send("Error deleting record");
+  }
+});
+
+router.patch("/Single/Twitch/:username", async (req, res) => {
+  try {
+    const query = { username: req.params.username };
+    const updates = {
+      $set: {
+          twitch_id: req.body.twitch_id
+      },
+    };
+
+    let collection = await db.collection("User");
+    let result = await collection.updateOne(query, updates);
+    res.send(result).status(200);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error updating record");
+  }
+});
+
+router.get("/Single/Twitch/:username", async (req, res) => {
+  try {
+    const query = { username: req.params.username };
+
+    let collection = await db.collection("User");
+    let result = await collection.findOne(query);
+    if(result.twitch_id !== undefined){
+      res.send(result.twitch_id).status(200);
+    }
+    else{
+      res.status(400).send("MissingTwitchID");
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error finding record");
   }
 });
 
