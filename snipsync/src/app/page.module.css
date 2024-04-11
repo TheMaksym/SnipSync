@@ -7,6 +7,15 @@
   background-color: #000000; /* Black background */
 }
 
+.test {
+  min-height: 1vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: left;
+  background-color: #000000;
+}
+
 .description {
   text-align: center;
   color: #FFFFFF; /* White text */
@@ -54,3 +63,7 @@
 .buttons input[type="submit"]:hover, .buttons input[type="button"]:hover {
   background-color: #4C2FBF; /* Darker purple on hover */
 }
+
+
+
+

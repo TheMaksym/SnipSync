@@ -1,1 +1,7 @@
-BackEnd/config.env
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/BackEnd/node_modules
+
+# local env files
+/BackEnd/config.env
