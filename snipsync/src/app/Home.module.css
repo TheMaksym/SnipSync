@@ -1,0 +1,43 @@
+.main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000; /* Black background */
+  }
+  
+  .description {
+    text-align: center;
+    color: #FFFFFF; /* White text */
+    
+  } 
+  
+  .buttonBox {
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center children horizontally */
+    gap: 10px; /* Space between buttons */
+    text-align: center;
+  }
+  
+  /* Button styles */
+  .login, .signup {
+    font-size: 1em; /* Match the font size from the design */
+    padding: 10px 24px; /* Add padding to increase the size of the buttons */
+    border: 2px solid transparent; /* Default border to override for 'Sign Up' */
+    border-radius: 4px; /* Rounded corners */
+    margin: 8px; /* Space between buttons */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    text-decoration: none; /* Remove underline from links */
+    display: inline-block; /* Allow for margins and padding on anchor tags */
+    width: 100%;
+    background-image: linear-gradient(to right,blue, purple);
+    border: #5D3FD3;
+    color: #ffffff;
+  }
+
+  .login:hover, .signup:hover {
+    background-image:linear-gradient(to left, blue, purple);
+
+  }

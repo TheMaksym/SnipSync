@@ -41,17 +41,17 @@
   .btn_secondary {
     border: 2px solid #5D3FD3;
     background-color: #1A1A1A;
-    color: #5D3FD3;
+    color: #ffffff;
     margin-right: 50px;
   }
   
   .btn_secondary:hover {
     border: 2px solid #5D3FD3;
-    color: #5D3FD3;
+    background-color: #5D3FD3;
   }
   
   .link {
-    color: #34A853;
+    color: #000000;
   }
 
   .logo{

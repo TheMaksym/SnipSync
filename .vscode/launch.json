@@ -1,0 +1,34 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Run frontend",
+            "url" : "http://localhost:3000",
+            "webRoot": "${workspaceFolder}\\snipsync",
+            "sourceMaps": true,
+            "resolveSourceMapLocations": [
+                "${workspaceFolder}/**",
+                "!**/node_modules/**"
+            ]
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Run backend",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}\\snipsync\\src\\server\\backend.js",
+            "envFile": "${workspaceFolder}\\snipsync\\\\srcserver\\config.env"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "FrontEnd/BackEnd",
+            "configurations": ["Run frontend", "Run backend"],
+            "stopAll": true
+        }
+    ]
+}

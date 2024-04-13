@@ -1,13 +1,29 @@
 import Image from "next/image";
-import Navbar from "../components/navbar";
+import Navbar from "../components/Navbar";
+import styles from "./Home.module.css";
 
 export default function Home() {
   return (
     <>
-    
-    <Navbar isUserAuthenticated={false} activeLink="dashboard" />
-    <Navbar isUserAuthenticated={false} activeLink="players" />
-    <p>Hello World</p>
+
+      <Navbar isUserAuthenticated={false} activeLink="" />
+
+      <div className={styles.main}>
+
+        <Image
+          src="/images/SnipSyncLogo.png"
+          alt="Logo"
+          width={200}
+          height={200}
+        />
+
+        <div className={styles.buttonBox}>
+
+          <a href="/login" className={styles.login}>Log In</a>
+          <a href="/signup" className={styles.signup}>Sign Up</a>
+        </div>
+
+      </div>
 
     </>
   );
