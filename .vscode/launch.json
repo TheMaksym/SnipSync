@@ -6,7 +6,12 @@
             "request": "launch",
             "name": "Run frontend",
             "url" : "http://localhost:3000",
-            "webRoot": "${workspaceFolder}\\snipsync"
+            "webRoot": "${workspaceFolder}\\snipsync",
+            "sourceMaps": true,
+            "resolveSourceMapLocations": [
+                "${workspaceFolder}/**",
+                "!**/node_modules/**"
+            ]
         },
         {
             "type": "node",
@@ -15,8 +20,8 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}\\BackEnd\\backend.js",
-            "envFile": "${workspaceFolder}\\BackEnd\\config.env"
+            "program": "${workspaceFolder}\\snipsync\\src\\server\\backend.js",
+            "envFile": "${workspaceFolder}\\snipsync\\\\srcserver\\config.env"
         }
     ],
     "compounds": [
