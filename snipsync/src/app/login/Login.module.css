@@ -12,16 +12,20 @@
   }
   
   .Content {
-    margin-top: 150px;
+    margin: 150px auto 0; /* Use auto for left and right margins to center the div horizontally */
     border: 1px solid black;
+    width: 80%; /* Set a width to limit the content and center it */
+    padding: 20px; /* Add some padding for spacing */
   }
   
   .h3 {
-    font-size: 24px; /* Adjust font size to match Figma design */
-    color: #5D3FD3; /* Replace with the actual color from your Figma design */
-    margin-bottom: 20px; /* Adjust space between title and logo */
+    margin-top: 10px; /* Add some space between the image and text */
+    margin-bottom: 10px;
+    margin-left: 10px;
+    font-size: 24px; /* Adjust the font size as needed */
+    color: #5D3FD3; /* Adjust the color of the text */
   }
-  
+
   .form {
     display: flex;
     flex-direction: column;
@@ -30,7 +34,6 @@
   
   .input {
     border: 3px solid #5D3FD3;
-    border-radius: 1rem;
     height: 2rem;
     box-shadow:  0px 16px 17px #7034a8;
     color:#000000;
@@ -41,7 +44,6 @@
     font-size: 1em; /* Match the font size from the design */
     padding: 10px 24px; /* Add padding to increase the size of the buttons */
     border: 2px solid transparent; /* Default border to override for 'Sign Up' */
-    border-radius: 4px; /* Rounded corners */
     margin-top: 8px;
     cursor: pointer; /* Change cursor to pointer on hover */
     text-decoration: none; /* Remove underline from links */
@@ -64,3 +66,4 @@
   .back:visited {
     color: #000000;
   }
+  

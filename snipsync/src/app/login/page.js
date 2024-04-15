@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from "next/image";
 import '../globals.css'
 import Navbar from '../../components/Navbar';
 import styles from './Login.module.css';
@@ -19,6 +20,12 @@ export default function LogIn() {
             <div className={styles.Home}>
                 <div className={styles.FormContainer}>
                     <div className={styles.Content}>
+                        <Image
+                        src="/images/SnipSyncLogo.png"
+                        alt="Logo"
+                        width={300}
+                        height={300}
+                        />
                         <h3 className={styles.h3}>SnipSync - Log In</h3>
                         <div>
                             <label className={styles.label} htmlFor="email">Username</label>
@@ -30,7 +37,6 @@ export default function LogIn() {
 
                         </div>
                         <button className={styles.submit} type="button" onClick={() => SignIn(username, password)}>Submit</button>
-                        
                     </div>
                 </div>
             </div>
