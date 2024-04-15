@@ -1,26 +1,44 @@
-'use client'
+// Navbar.js
 
-import styles from './Navbar.module.css';
+'use client'
+import React, { useState } from 'react';
+import styles from './NavbarVert.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
 
-export default function Navbar (props) {
-  const [isUserAuthenticated, setIsUserAuthenticated] = React.useState(props.isUserAuthenticated);
+export default function Navbar(props) {
+  const [isUserAuthenticated] = useState(props.isUserAuthenticated);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsExpanded(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsExpanded(false);
+  };
+
   return (
-    <nav className={styles.nav}>
+    <nav 
+      className={`${styles.nav} ${isExpanded ? styles.expanded : ''}`}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <nav className={styles.nav}>
         <Link href="/">
           <Image 
             src="/images/SnipSyncLogo.png"
             width={50}
             height={50}
             alt="Logo"
+            layout = 'responsive'
             />
         </Link> 
         {isUserAuthenticated && 
           <div className={styles.navLinks}>
               <a href="/dashboard" style={{ textDecoration: props.activeLink === "dashboard" ? "underline" : "none" }} className={styles.link}>Dashboard</a>
               <a href="/profile" style={{ textDecoration: props.activeLink === "profile" ? "underline" : "none" }} className={styles.btn_primary}>My Profile</a>
+              
           </div>
         }
         {!isUserAuthenticated && 
@@ -30,5 +48,6 @@ export default function Navbar (props) {
           </div>
         }
     </nav>
+    </nav>
   );
-};
+}
