@@ -1,1 +1,3 @@
 BackEnd/config.env
+BackEnd/node_modules
+snipsync/node_modules
