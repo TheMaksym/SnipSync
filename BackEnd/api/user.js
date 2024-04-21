@@ -9,6 +9,7 @@ import { ObjectId } from "mongodb";
 //This will be used for hashing passwords
 import crypto from "crypto";
 import { isBuffer } from "util";
+import { Console } from "console";
 
 // router is an instance of the express router.
 // We use it to define our routes.
@@ -31,13 +32,16 @@ router.get("/Single/:username", async (req, res) => {
   else res.send(result).status(200);
 });
 
-router.get("/validate/", async(req, res) => {
+router.post("/validate/", async(req, res) => {
   try{
     
     let collection = await db.collection("User"); 
     let checkQuery = {username : req.body.username};
     let checkName = await collection.findOne(checkQuery);
-    if(req.body.password == checkName.password){
+    const hashedPass = crypto.createHmac('sha256', secret)
+    .update(req.body.password)
+    .digest('hex');
+    if(hashedPass == checkName.password){
       res.status(200).send("VALIDATED");
     }
     else{
@@ -46,7 +50,7 @@ router.get("/validate/", async(req, res) => {
   }
   catch (err) {
     console.error(err);
-    res.status(500).send("Error adding record");
+    res.status(500).send("Error validating record");
   }
 });
 
