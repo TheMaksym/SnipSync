@@ -37,15 +37,15 @@ router.get("/Search/", async (req, res) => {
         });
 });
 
-
-//Bottom functions need OAuth Authentication
+//------------------------------------------------------------------------
+//These  functions do need OAuth Authentication
 router.get("/User/Signin", async(req, res) => {
     const oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
 
     // Parameters to pass to OAuth 2.0 endpoint
     const params = {
         client_id: process.env.YOUTUBE_CLIENT_ID,
-        redirect_uri: 'http://localhost:3000',
+        redirect_uri: 'http://localhost:3000/getOauth/youtubetoken',
         response_type: 'token',
         scope: 'https://www.googleapis.com/auth/youtube.readonly',
         include_granted_scopes: 'true',
