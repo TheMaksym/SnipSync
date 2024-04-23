@@ -1,50 +1,34 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 
 export default function GetYoutubeToken() {
-    //const router = useRouter();
-    const [tokenDetails, setTokenDetails] = useState({
-        accessToken: '',
-        expiresIn: '',
-        tokenType: '',
-        scope: '',
-    });
+    const router = useRouter();
 
     useEffect(() => {
-        const hash = window.location.hash.substring(1); // Removes the hash
+        const hash = window.location.hash.substring(1); //Remove the hash
         const params = new URLSearchParams(hash);
-        //Saves all the parts
         const accessToken = params.get('access_token');
-        const expiresIn = params.get('expires_in');
-        const tokenType = params.get('token_type');
-        const scope = params.get('scope');
+        //Not needed, but here are the other parts if you want them later
+        // const expiresIn = params.get('expires_in');
+        // const tokenType = params.get('token_type');
+        // const scope = params.get('scope');
 
         if (accessToken) {
-            setTokenDetails({ accessToken, expiresIn, tokenType, scope });
-            // Store locally, for now
+
+            //Store the access token locally
             localStorage.setItem('access_token', accessToken);
-            console.log('Token saved to localStorage');
+            console.log('Access token retreived: ' + accessToken);
             
-            // Redirect to the profile page instead when thats made
-            //router.push('/dashboard'); 
+            //Redirect to the profile page instead when thats made, for now it redirects to the dashboard
+            router.push('/dashboard'); 
         }
     }, []);
 
     return (
         <div>
-            <h1>Token Received</h1>
-            {tokenDetails.accessToken ? (
-                <div>
-                    <p>Access Token: {tokenDetails.accessToken}</p>
-                    <p>Expires In: {tokenDetails.expiresIn}</p>
-                    <p>Token Type: {tokenDetails.tokenType}</p>
-                    <p>Scope: {tokenDetails.scope}</p>
-                </div>
-            ) : (
-                <p>No token received yet.</p>
-            )}
+            <h1>Token Get Page</h1>
         </div>
     );
 }
