@@ -8,6 +8,7 @@
 }
 
 .FormContainer {
+    margin-top:100px;
     display: flex;
     flex-direction: column;
     align-items: center; /* Center align items for better form presentation */

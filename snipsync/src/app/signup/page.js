@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from "next/image";
 import Navbar from '../../components/Navbar';
 import styles from './Signup.module.css'; // Ensure the CSS module is correctly named and imported
@@ -14,6 +14,14 @@ export default function SignUp() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordError, setPasswordError] = useState(false);
     const router = useRouter();
+
+    useEffect(() => {
+        const authenticated = localStorage.getItem("authenticated") === "true";
+        if (authenticated) {
+          router.push("/dashboard");
+        }
+      });
+      
     //idk if this works or not but this is not a critical issue 
     // const validatePassword = () => {
     //     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;

@@ -7,6 +7,7 @@ import TwitchBox from '../../components/TwitchBox';
 import PropTypes from 'prop-types';
 import styles from './Dashboard.module.css'; // Ensure the CSS module is correctly named and imported
 import axios from 'axios';
+import {useRouter} from "next/navigation";
 
 //Returns list of channelID's from subscriptions
 function fetchSubscriptions (token) {
@@ -25,9 +26,13 @@ export default function Dashboard() {
   //Set data for the videos
   const [youtubeVideoIds, setYoutubeVideoIDs] = useState([]);
   const twitchChannelName = 'moistcr1tikal'; //example for twitch, will implement later 
+  const {push} = useRouter();
   useEffect(() => {
     const userToken = localStorage.getItem('access_token');
-  
+    const authenticated = localStorage.getItem("authenticated") === 'true';
+    if (!authenticated){
+      push("/")
+    }
     fetchSubscriptions(userToken)
       .then(response => { //Get channelID list 
         const channelIDs = response.data.slice(0, 5); // Get the first 5 channels
