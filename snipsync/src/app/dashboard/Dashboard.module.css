@@ -37,17 +37,4 @@
     width: 100%; /* Full width to utilize the space */
 }
 
-.videoResponsive {
-    width: 45%; /* Set a width percentage for video containers */
-    padding-top: 25.25%; /* Adjust aspect ratio */
-    position: relative;
-    overflow: hidden;
-}
 
-.videoResponsive iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
