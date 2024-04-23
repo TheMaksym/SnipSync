@@ -1,0 +1,22 @@
+
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50px; /* Initial minimized width */
+    height: 100vh; /* Full height */
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center;
+    background-color: #1A1A1A; /* Dark background for the nav */
+    padding: 1rem 0; /* Padding at the top and bottom */
+    transition: width 0.3s; /* Smooth transition for expanding and minimizing */
+    z-index: 1000; /* Make sure it's above other content */
+  }
+  
+  .nav.expanded {
+    width: 250px; /* Expanded width */
+  }
+  
+  /* Add styling for links, buttons, etc., as necessary */
+  

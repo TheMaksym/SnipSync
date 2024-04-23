@@ -1,8 +1,9 @@
-import express from "express";
-import cors from "cors";
-import user from "./api/user.js";
-import twitch from "./api/twitch.js";
-import youtube from "./api/youtube.js";
+const express = require("express");
+const cors = require("cors");
+const user = require("./api/user.js");
+const twitch = require("./api/twitch.js");
+const youtube = require("./api/youtube.js");
+const dotenv = require('dotenv').config({path:__dirname+"/.env.local"});
 
 const PORT = process.env.PORT || 5050;
 const app = express();

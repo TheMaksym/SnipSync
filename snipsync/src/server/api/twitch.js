@@ -1,10 +1,10 @@
-import express from "express";
-import db from "../db/connection.js";
-import axios from "axios"
+const express = require( "express");
+const db = require("../db/connection.js");
+const axios = require("axios")
 //api call on http://localhost:5050/twitch/
 
 const router = express.Router();
-
+const dotenv = require('dotenv').config({path:__dirname+"/../.env.local"});
 
 router.get("/", async (req, res) => {
 
@@ -40,4 +40,4 @@ router.get("/OAuth/ProvideToken", async(req, res) => {
 
 
 
-export default router;
+module.exports = router;

@@ -1,0 +1,69 @@
+.Home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000000; /* Replace with the background color from your Figma design */
+  }
+  
+  .FormContainer {
+    display: flex; /* Use flexbox */
+    flex-direction: column; /* Stack children vertically */
+    align-items: flex-start; /* Align children to the start (left side) */
+  }
+  
+  .Content {
+    margin: 150px auto 0; /* Use auto for left and right margins to center the div horizontally */
+    border: 1px solid black;
+    width: 80%; /* Set a width to limit the content and center it */
+    padding: 20px; /* Add some padding for spacing */
+  }
+  
+  .h3 {
+    margin-top: 10px; /* Add some space between the image and text */
+    margin-bottom: 10px;
+    margin-left: 10px;
+    font-size: 24px; /* Adjust the font size as needed */
+    color: #5D3FD3; /* Adjust the color of the text */
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .input {
+    border: 3px solid #5D3FD3;
+    height: 2rem;
+    box-shadow:  0px 16px 17px #7034a8;
+    color:#000000;
+  }
+  
+  
+  .submit {
+    font-size: 1em; /* Match the font size from the design */
+    padding: 10px 24px; /* Add padding to increase the size of the buttons */
+    border: 2px solid transparent; /* Default border to override for 'Sign Up' */
+    margin-top: 8px;
+    cursor: pointer; /* Change cursor to pointer on hover */
+    text-decoration: none; /* Remove underline from links */
+    display: inline-block; /* Allow for margins and padding on anchor tags */
+    width: 100%;
+    background-color: #5D3FD3; /* Green background */
+    color: #ffffff; /* White text */
+    border-radius: 2rem;
+  }
+  
+  .error {
+    color: red;
+  }
+  
+  .back {
+    margin-top: 1rem;
+    color: #000000;
+  }
+  
+  .back:visited {
+    color: #000000;
+  }
+  

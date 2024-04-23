@@ -1,15 +1,15 @@
-import express from "express";
+const express = require ( "express");
 
 // This will help us connect to the database
-import db from "../db/connection.js";
+const db = require ( "../db/connection.js");
 
-// This help convert the id from string to ObjectId for the _id.
-import { ObjectId } from "mongodb";
+// This help convert the id = require ( string to ObjectId for the _id.
+const { ObjectId }  = require("mongodb");
 
 //This will be used for hashing passwords
-import crypto from "crypto";
-import { isBuffer } from "util";
-import { Console } from "console";
+const crypto = require ( "crypto");
+const { isBuffer } = require ( "util");
+const { Console } = require ( "console");
 
 // router is an instance of the express router.
 // We use it to define our routes.
@@ -34,14 +34,16 @@ router.get("/Single/:username", async (req, res) => {
 
 router.post("/validate/", async(req, res) => {
   try{
-    
     let collection = await db.collection("User"); 
     let checkQuery = {username : req.body.username};
     let checkName = await collection.findOne(checkQuery);
     const hashedPass = crypto.createHmac('sha256', secret)
     .update(req.body.password)
     .digest('hex');
-    if(hashedPass == checkName.password){
+    if(checkName == undefined){
+      res.status(403).send("USER DOES NOT EXIST");
+    }
+    else if(hashedPass == checkName.password){
       res.status(200).send("VALIDATED");
     }
     else{
@@ -155,4 +157,4 @@ router.get("/Single/Twitch/:username", async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;
