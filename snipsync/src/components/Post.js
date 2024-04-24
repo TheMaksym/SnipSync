@@ -21,7 +21,7 @@ async function returnPostDetails(embedID) {
         likes: 0,
         comments: [],
       };
-
+      await axios.post("http://localhost:5050/post/", form);
       return form;
     } else {
       const form = {
@@ -41,7 +41,18 @@ async function returnPostDetails(embedID) {
   }
 }
 
+
+
 export default function Post(props) {
+
+  const [newComment, setNewComment] = useState(""); 
+
+  const handleCommentSubmit = () => {
+    // Logic to post the new comment
+    console.log(newComment);
+    setNewComment(""); // Reset the comment input after submission
+  };
+
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [likes, setLikes] = useState(0);
@@ -53,25 +64,36 @@ export default function Post(props) {
       setLikes(response.likes);
       setComments(response.comments);
       setAuthor(response.author);
-    });
+    }, []);
   });
 
   return (
     <>
-      <p>{title}</p>
-      <div>
-        <p>By: {author}</p>
-        <p>Likes: {likes}</p>
-        <p>Comments: </p>
+      <h2 className={styles.videoTitle}>{title}</h2>
+      <YoutubeBox embedId={props.embedId} />
+      <div className={styles.stats}>
+        <span className={styles.likes}>Likes: {likes}</span>
+        <span className={styles.comments}>Comments:</span>
         {comments.map((data, index) => (
-          <div key={index}>
-            <p>Author: {data.Author}</p>
-            <p>Text: {data.Text}</p>
+          <div key={index} className={styles.comment}>
+            <p>
+              {data.Author} : {data.Text}
+            </p>
           </div>
         ))}
+        <div className={styles.commentForm}>
+          <input
+            type="text"
+            value={newComment}
+            onChange={(e) => setNewComment(e.target.value)}
+            placeholder="Write a comment..."
+            className={styles.commentInput}
+          />
+          <button onClick={handleCommentSubmit} className={styles.commentButton}>
+            Submit Comment
+          </button>
+        </div>
       </div>
-      <YoutubeBox embedId={props.embedId} />
-      <p></p>
     </>
   );
 }

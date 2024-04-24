@@ -1,3 +1,51 @@
-.main {
-    align-items: center;
+.postContainer {
+    border: 2px solid blue; /* Adjust color and width as desired */
+    padding: 16px;
+    margin: 16px;
+    border-radius: 8px; /* Optional, for rounded corners */
+  }
+
+.videoTitle {
+font-size: 24px;
+margin-bottom: 8px;
+color: blue; /* Use your color preference */
+}
+
+.stats {
+display: flex;
+flex-direction: column;
+margin-top: 8px;
+}
+
+.likes,
+.comments {
+font-size: 18px;
+margin-bottom: 4px;
+}
+
+.comment {
+border-bottom: 1px solid #ccc;
+padding: 4px 0;
+}
+
+.commentForm {
+display: flex;
+flex-direction: column;
+margin-top: 8px;
+}
+
+.commentInput {
+padding: 8px;
+margin-bottom: 8px;
+border: 1px solid #ccc;
+border-radius: 4px;
+}
+
+.commentButton {
+padding: 8px 16px;
+background-color: blue; /* Use your color preference */
+color: white;
+border: none;
+border-radius: 4px;
+cursor: pointer;
 }
