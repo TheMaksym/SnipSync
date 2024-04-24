@@ -94,6 +94,7 @@ export default function LogIn() {
     } else if (response.status == 200) {
       console.log("Success!");
       localStorage.setItem("authenticated", true);
+      push('/dashboard');
     } else {
       console.log(response.statusText);
     }

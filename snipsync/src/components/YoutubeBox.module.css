@@ -3,6 +3,7 @@
   padding-top: 25.25%; /* Adjust aspect ratio */
   position: relative;
   overflow: hidden;
+  z-index: auto;
 }
 
 .videoResponsive iframe {
