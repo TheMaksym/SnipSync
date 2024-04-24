@@ -6,11 +6,11 @@
     align-items: center;
     justify-content: center;
     background-color: #000000; /* Same background color as the login page */
-    padding-top: 100px;
+    padding-top: 25px;
 }
 
 .FormContainer {
-    margin-top:100px;
+    margin-top:50px;
     display: flex;
     flex-direction: column;
     align-items: center; /* Center align items for better form presentation */

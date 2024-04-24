@@ -5,7 +5,7 @@
     width: 100%;
     display: flex;
     align-items: center;
-    background-image: linear-gradient(to right, blue, purple);
+    background-image: linear-gradient(to right, #8459f7, #623DCE);
     padding: 1rem;
     margin: 0;
     border-bottom: 2px solid #5D3FD3;

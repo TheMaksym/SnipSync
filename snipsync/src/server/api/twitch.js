@@ -32,9 +32,28 @@ router.get("/", async (req, res) => {
     res.send("Recieved").status(200);
 });
 
-router.get("/OAuth/ProvideToken", async(req, res) => {
+router.get("/user/signin", async(req, res) => {
     const url = "https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=" + process.env.TWITCH_CLIENT_ID + "&redirect_uri=http://localhost:3000/getOauth/twitchtoken/&scope=user%3Aread%3Afollows";
-    res.send(url).status(200);
+    const oauth2Endpoint = 'https://accounts.google.com/o/oauth2/v2/auth';
+
+    const params = {
+        client_id: process.env.YOUTUBE_CLIENT_ID,
+        redirect_uri: 'http://localhost:3000/getOauth/youtubetoken',
+        response_type: 'token',
+        scope: 'https://www.googleapis.com/auth/youtube.readonly',
+        include_granted_scopes: 'true',
+        state: 'pass-through value'
+    };
+
+    //Makes the actual url
+    const queryString = Object.entries(params)
+        .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+        .join('&');
+
+    const authUrl = `${oauth2Endpoint}?${queryString}`;
+
+    //Redirects user to the google server, which will redirect the user to our youtubetoken page
+    res.redirect(url);
 })
 
 router.get("/userID/:bearerToken", async(req, res) => {

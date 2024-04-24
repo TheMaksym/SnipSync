@@ -42,10 +42,11 @@ export default function Dashboard() {
     if (!authenticated) {
       push("/");
     }
-
-    fetchStreams(twitchToken).then((response) => {
-      setTwitchStreams(response.data);
-    });
+    if(twitchToken != ""){
+      fetchStreams(twitchToken).then((response) => {
+        setTwitchStreams(response.data);
+      });
+    }
 
     fetchSubscriptions(userToken)
       .then((response) => {
