@@ -1,7 +1,11 @@
 'use client'
 
+import Navbar from '../../components/Navbar';
+ 
+
 export default function SignUp(){
     return(
-    <p>profile</p>
+        <h1>Hi</h1>
+    
     )
 }
