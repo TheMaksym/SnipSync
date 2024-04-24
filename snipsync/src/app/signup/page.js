@@ -14,29 +14,6 @@ export default function SignUp() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [passwordError, setPasswordError] = useState(false);
     const router = useRouter();
-    //idk if this works or not but this is not a critical issue 
-    // const validatePassword = () => {
-    //     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    //     return regex.test(password);
-    // };
-
-    // const checkPasswordsMatch = () => {
-    //     return password === confirmPassword;
-    // };
-
-    // const handleSubmit = () => {
-    //     if (!validatePassword()) {
-    //         setPasswordError('Password must be at least 8 characters long and include uppercase, lowercase, and special characters.');
-    //         return;
-    //     }
-    //     if (!checkPasswordsMatch()) {
-    //         setPasswordError('Passwords do not match.');
-    //         return;
-    //     }
-    //     setPasswordError('');
-    //     // Process the signup logic here @Connor 
-    // };
-
 
     const handleSubmit = () => {
         
@@ -47,7 +24,6 @@ export default function SignUp() {
             setPasswordError(true);
         }
     }
-
 
     return (
         <>
@@ -67,16 +43,17 @@ export default function SignUp() {
                             <input className={styles.input} type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
                             <input className={styles.input} type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                             <input className={styles.input} type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
-                            {passwordError && <p>Password must be at least 8 characters long and match the confirm password.</p>}
+                            {passwordError &&
+                             (<p className={styles.error}>Password must be at least 8 characters long and match the confirm password.</p>)}
                             <button className={styles.submit} type="submit">Sign Up</button>
                             
                         </form>
-                        <Link href="/login">
+                        
+                        <Link href="/login" className={styles.link}>
                             Have an account? Log In
                         </Link>
                     </div>
                 </div>
-                
             </div>
         </>
     );
