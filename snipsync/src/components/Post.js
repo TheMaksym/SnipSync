@@ -68,7 +68,7 @@ export default function Post(props) {
   });
 
   return (
-    <>
+    <div className={styles.postContainer}>
       <h2 className={styles.videoTitle}>{title}</h2>
       <YoutubeBox embedId={props.embedId} />
       <div className={styles.stats}>
@@ -94,6 +94,6 @@ export default function Post(props) {
           </button>
         </div>
       </div>
-    </>
+    </div>
   );
 }
