@@ -1,10 +1,12 @@
 /* Signup.module.css */
 
 .Home {
+    
     display: flex;
     align-items: center;
     justify-content: center;
     background-color: #000000; /* Same background color as the login page */
+    padding-top: 100px;
 }
 
 .FormContainer {
@@ -15,7 +17,7 @@
     border: 1px solid #623DCE; /* Use the purple color scheme */
     padding: 20px;
     width: 50%; /* Adjust width as needed based on design */
-    background-color: #FFFFFF; /* Light background for the form */
+    background-color: #5D3FD3; /* Light background for the form */
     box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Soft shadow for depth */
     border-radius: 8px; /* Rounded corners for the form container */
 }
@@ -28,7 +30,7 @@
 }
 
 .h3 {
-    color: #623DCE; /* Purple color for headings */
+    color: #000000; /* Purple color for headings */
     font-size: 24px;
     margin: 20px 0;
 }
@@ -46,16 +48,18 @@
     border-radius: 4px; /* Rounded corners for the input fields */
     font-size: 16px; /* Legible font size */
     width: calc(100% - 24px); /* Full width minus padding */
+    color: #000000;
 }
 
-.submit {
-    background-color: #623DCE; /* Purple background for consistency */
+.submit { /* sign up button*/
+    background-color: #1A1A1A; /* Purple background for consistency */
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-bottom: 15px;
 }
 
 .submit:hover {
@@ -70,7 +74,7 @@
 
 /* Additional link style for consistency */
 .link {
-    color: #623DCE;
+    color: #ffffff;
     cursor: pointer;
     text-decoration: none;
 }

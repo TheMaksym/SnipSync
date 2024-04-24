@@ -56,7 +56,6 @@ export default function SignUp() {
         }
     }
 
-
     return (
         <>
             <Navbar isUserAuthenticated={false} activeLink="signup" />
@@ -79,12 +78,12 @@ export default function SignUp() {
                             <button className={styles.submit} type="submit">Sign Up</button>
                             
                         </form>
-                        <Link href="/login">
+                        
+                        <Link href="/login" className={styles.link}>
                             Have an account? Log In
                         </Link>
                     </div>
                 </div>
-                
             </div>
         </>
     );
