@@ -12,29 +12,38 @@
     box-sizing: border-box; /* Include padding and border in the width and height */
 }
 
-.Content {
-    width: 100%; /* Full width for the dashboard */
-    padding: 20px;
-    border: 2px solid #5D3FD3; /* Adding a purple border for style */
-    border-radius: 10px; /* For rounded corners */
-    background-color: #1C1C1C; /* Slightly different background for contrast */
-    color: white; /* Text color */
-    box-shadow: 0 8px 16px rgba(93,63,211,0.5); /* Subtle shadow for depth */
-    margin-top: 20px; /* Space from the top of the viewport */
+.imageContainer {
+    position: fixed;
+    top: 210px; /* Adjust the top value to position the image below the taskbar */
+    left: 20%;
+    transform: translateX(-50%);
+    width: 200px; /* Adjust the width of the image container */
+    height: 200px; /* Adjust the height of the image container */
+    border: 0px solid #623DCE;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #5D3FD3;
+    background-image: linear-gradient(to bottom, #5D3FD3, #000000); /* Replace 'path_to_your_image.jpg' with the path to your image */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px; /* Apply border radius to match the taskbar */
 }
+
+
 
 .h3 {
-    color: #5D3FD3; /* Heading color */
-    text-align: center; /* Centered text for heading */
-    margin-bottom: 20px; /* More space below heading */
+    
+    
+    color: #ffffff;
+    font-size: 24px;
+    margin: 40px 0;
+    font-weight: 800;
+    
 }
 
-.ApiContainers {
-    display: flex;
-    justify-content: space-evenly; /* Evenly space out the API containers */
-    flex-wrap: wrap; /* Wrap onto next line if not enough space */
-    gap: 20px; /* Space between the containers */
-    width: 100%; /* Full width to utilize the space */
-}
+
 
 
