@@ -7,6 +7,7 @@ import Navbar from "../../components/Navbar";
 import styles from "./Login.module.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import axios from 'axios';
 
 export default function LogIn() {
   const [username, setUsername] = useState("");
@@ -96,4 +97,34 @@ export default function LogIn() {
       </div>
     </>
   );
+
+  async function SignIn(username, password) {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        password,
+      }),
+    };
+    const response = await fetch(
+      "http://localhost:5050/User/validate/",
+      requestOptions
+    );
+
+    if (response.status == 403) {
+      console.log(response.statusText);
+      console.log("DENIED");
+      localStorage.setItem("authenticated", false);
+    } else if (response.status == 200) {
+      console.log("Success!");
+      localStorage.setItem("authenticated", true);
+      push('/dashboard');
+    } else {
+      console.log(response.statusText);
+    }
+  }
 }
