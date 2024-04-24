@@ -5,7 +5,7 @@
     width: 100%;
     display: flex;
     align-items: center;
-    background-image: linear-gradient(to right, blue, purple);
+    background-image: linear-gradient(to right, #8459f7, #623DCE);
     padding: 1rem;
     margin: 0;
     border-bottom: 2px solid #5D3FD3;
@@ -26,7 +26,7 @@
     margin-right: 30px;
   }
   
-  .btn_primary {
+  .btn_primary { /* login button */
     border: 2px solid #5D3FD3;
     background-color: #1A1A1A;
     color: #ffffff;
@@ -34,20 +34,20 @@
   }
   
   .btn_primary:hover {
-    border: 2px solid #5D3FD3;
-    background-color: #5D3FD3;
+    border: 2px solid #8459f7;
+    background-color: #8459f7;
   }
   
-  .btn_secondary {
+  .btn_secondary { /* sign up button */
     border: 2px solid #5D3FD3;
     background-color: #1A1A1A;
     color: #ffffff;
     margin-right: 50px;
   }
   
-  .btn_secondary:hover {
-    border: 2px solid #5D3FD3;
-    background-color: #5D3FD3;
+  .btn_secondary:hover { 
+    border: 2px solid #8459f7;
+    background-color: #8459f7;
   }
   
   .link {
