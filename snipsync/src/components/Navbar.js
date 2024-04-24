@@ -19,8 +19,8 @@ export default function Navbar (props) {
         </Link> 
         {isUserAuthenticated && 
           <div className={styles.navLinks}>
-              <a href="/dashboard" style={{ textDecoration: props.activeLink === "dashboard" ? "underline" : "none" }} className={styles.link}>Dashboard</a>
-              <a href="/profile" style={{ textDecoration: props.activeLink === "profile" ? "underline" : "none" }} className={styles.btn_primary}>My Profile</a>
+              <a href="/dashboard" style={{ textDecoration: "none" }} className={styles.btn_primary}>Dashboard</a>
+              <a href="/profile" style={{ textDecoration: "none" }} className={styles.btn_primary}>My Profile</a>
           </div>
         }
         {!isUserAuthenticated && 
