@@ -56,7 +56,7 @@ router.post("/validate/", async(req, res) => {
   }
 });
 
-// This section will help you create a new record.
+// This section will help you create a new profile
 router.post("/Create/", async (req, res) => {
   try {
     let newDocument = {
@@ -64,7 +64,9 @@ router.post("/Create/", async (req, res) => {
       password: crypto.createHmac('sha256', secret)
                 .update(req.body.password)
                 .digest('hex'),
-      accountName: req.body.accountName,
+      email: req.body.email,
+      twitch_token: "",
+      youtube_token: ""
     };
     
 
@@ -126,7 +128,7 @@ router.patch("/Single/Twitch/:username", async (req, res) => {
     const query = { username: req.params.username };
     const updates = {
       $set: {
-          twitch_id: req.body.twitch_id
+          twitch_token: req.body.twitch_token
       },
     };
 
@@ -139,6 +141,23 @@ router.patch("/Single/Twitch/:username", async (req, res) => {
   }
 });
 
+router.patch("/Single/Youtube/:username", async (req, res) => {
+  try {
+    const query = { username: req.params.username };
+    const updates = {
+      $set: {
+          youtube_token: req.body.youtube_token
+      },
+    };
+
+    let collection = await db.collection("User");
+    let result = await collection.updateOne(query, updates);
+    res.send(result).status(200);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error updating record");
+  }
+});
 router.get("/Single/Twitch/:username", async (req, res) => {
   try {
     const query = { username: req.params.username };

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
 export default function GetYoutubeToken() {
     const router = useRouter();
@@ -20,7 +21,12 @@ export default function GetYoutubeToken() {
             //Store the access token locally
             localStorage.setItem('access_token', accessToken);
             console.log('Access token retreived: ' + accessToken);
-            
+
+            const body = {
+                youtube_token : accessToken
+            }
+
+            axios.patch("http://localhost:5050/user/single/youtube/"+localStorage.getItem('username'), body);
             //Redirect to the profile page instead when thats made, for now it redirects to the dashboard
             router.push('/dashboard'); 
         }

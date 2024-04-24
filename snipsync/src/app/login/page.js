@@ -7,6 +7,7 @@ import Navbar from "../../components/Navbar";
 import styles from "./Login.module.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import axios from 'axios';
 
 export default function LogIn() {
   const [username, setUsername] = useState("");
@@ -93,6 +94,11 @@ export default function LogIn() {
       localStorage.setItem("authenticated", false);
     } else if (response.status == 200) {
       console.log("Success!");
+      localStorage.setItem("username", username);
+
+      const result = await axios.get("http://localhost:5050/user/single/" + username);
+      localStorage.setItem("access_token", result.data.youtube_token);
+      localStorage.setItem("access_token_twitch", result.data.twitch_token);
       localStorage.setItem("authenticated", true);
       push('/dashboard');
     } else {
