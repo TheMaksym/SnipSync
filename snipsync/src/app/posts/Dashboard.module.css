@@ -1,0 +1,40 @@
+/* Dashboard.module.css */
+
+.Home {
+    display: flex;
+    flex-direction: column; /* Align items in a vertical stack */
+    align-items: center;
+    justify-content: flex-start; /* Start aligning content from the top */
+    background-color: #000000; /* Background color */
+    min-height: 100vh; /* Full height */
+    margin: 0; /* Remove default margin */
+    padding: 20px; /* Uniform padding around the edges */
+    box-sizing: border-box; /* Include padding and border in the width and height */
+}
+
+.Content {
+    width: 100%; /* Full width for the dashboard */
+    padding: 20px;
+    border: 2px solid #5D3FD3; /* Adding a purple border for style */
+    border-radius: 10px; /* For rounded corners */
+    background-color: #1C1C1C; /* Slightly different background for contrast */
+    color: white; /* Text color */
+    box-shadow: 0 8px 16px rgba(93,63,211,0.5); /* Subtle shadow for depth */
+    margin-top: 20px; /* Space from the top of the viewport */
+}
+
+.h3 {
+    color: #5D3FD3; /* Heading color */
+    text-align: center; /* Centered text for heading */
+    margin-bottom: 20px; /* More space below heading */
+}
+
+.ApiContainers {
+    display: flex;
+    justify-content: space-evenly; /* Evenly space out the API containers */
+    flex-wrap: wrap; /* Wrap onto next line if not enough space */
+    gap: 20px; /* Space between the containers */
+    width: 100%; /* Full width to utilize the space */
+}
+
+

@@ -48,7 +48,7 @@ export default function Dashboard() {
         setTwitchStreams(response.data);
       });
     }
-
+    
     fetchSubscriptions(userToken)
       .then((response) => {
         //Get channelID list
@@ -65,6 +65,10 @@ export default function Dashboard() {
       .catch((error) => {
         console.error("Error fetching from local backend: ", error);
       });
+
+      //const videoIDs = [ 'M4Rle1fGZXM']
+      //setYoutubeVideoIDs(videoIDs);
+
   }, []);
 
   return (

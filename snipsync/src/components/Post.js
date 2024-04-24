@@ -21,7 +21,7 @@ async function returnPostDetails(embedID) {
         likes: 0,
         comments: [],
       };
-
+      await axios.post("http://localhost:5050/post/", form);
       return form;
     } else {
       const form = {
@@ -53,25 +53,38 @@ export default function Post(props) {
       setLikes(response.likes);
       setComments(response.comments);
       setAuthor(response.author);
-    });
+    }, []);
   });
 
   return (
     <>
-      <p>{title}</p>
-      <div>
-        <p>By: {author}</p>
-        <p>Likes: {likes}</p>
-        <p>Comments: </p>
-        {comments.map((data, index) => (
-          <div key={index}>
-            <p>Author: {data.Author}</p>
-            <p>Text: {data.Text}</p>
+      <div className={styles.post}>
+        <h2 className="post-title">{title}</h2>
+        <div className="video-container">
+          <div className={styles.videoResponsive}>
+            <iframe
+              width="853"
+              height="480"
+              src={`https://www.youtube.com/embed/${props.embedId}`}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title="Embedded youtube"
+            />
           </div>
-        ))}
+        </div>
+        <div className={styles.footer}>
+          <span className={styles.likes}>Likes: {likes}</span>
+          <span className={styles.comments}>Comments:</span>
+          {comments.map((data, index) => (
+            <div key={index}>
+              <p>
+                {data.Author} : {data.Text}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
-      <YoutubeBox embedId={props.embedId} />
-      <p></p>
     </>
   );
 }

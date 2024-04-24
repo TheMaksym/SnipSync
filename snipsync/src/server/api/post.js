@@ -24,6 +24,7 @@ router.post("/", async (req, res) => {
     Title: req.body.title,
     Comments: req.body.comments,
     Likes: req.body.likes,
+    Author :req.body.author
   };
 
   let collection = await db.collection("Posts");
