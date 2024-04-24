@@ -53,6 +53,20 @@ router.get("/Search/String", async (req, res) => {
         });
 });
 
+//Gets information about a video from the id
+router.get("/Video/:id", async(req, res) => {
+    const url = "https://www.googleapis.com/youtube/v3/videos";
+    const params = {
+        key : process.env.YOUTUBE_API_KEY,
+        part : 'snippet',
+        id : req.params.id
+    }
+
+    const result = await axios.get(url, {params});
+    res.send(result.data).status(200);
+})
+
+
 //Returns a list of channel uploads, given a channel id
 //To call this: localhost:5050/youtube/Channels/Uploads?channel=
 //1 parameter: channel

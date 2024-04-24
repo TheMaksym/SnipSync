@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import Navbar from "../../components/Navbar";
 import YoutubeBox from "../../components/YoutubeBox";
 import TwitchBox from "../../components/TwitchBox";
+import Post from "../../components/Post";
 import PropTypes from "prop-types";
 import styles from "./Dashboard.module.css"; // Ensure the CSS module is correctly named and imported
 import axios from "axios";
@@ -74,7 +75,7 @@ export default function Dashboard() {
           <h3 className={styles.h3}>Welcome to your Dashboard</h3>
           <div className={styles.ApiContainers}>
               {youtubeVideoIds.map((embedId, index) => (
-                <YoutubeBox key={index} embedId={embedId} />
+                <Post embedId = {embedId} />
               ))}
               {twitchStreams.map((channelName) => (
                 <TwitchBox channelName={channelName} />
