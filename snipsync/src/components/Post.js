@@ -50,6 +50,39 @@ async function likePost(embedID, likes){
 }
 
 export default function Post(props) {
+  const [newComment, setNewComment] = useState(""); 
+
+  //Submits new comment
+  const handleCommentSubmit = () => {
+    const url = `http://localhost:5050/post/comments/${props.embedId}`; 
+    const author = localStorage.getItem('username');
+    
+    //Remember, comments have both author, and new comment
+    const newCommentData = {
+      Author: author,
+      Text: newComment
+    };
+    console.log(author);
+    console.log("comment submitted");
+    console.log(newComment);
+    console.log(newCommentData);
+    console.log(comments);
+
+    const updatedComments = [...comments, newCommentData];
+    
+
+    axios.put(url, { comment: newCommentData })
+      .then(response => {
+        console.log('Comment adding was successful!:', response.data);
+        setComments(updatedComments);
+        setNewComment(""); // Clear the input field
+      })
+      .catch(error => {
+        console.error('Could not add comment:', error);
+      });
+  };
+
+
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [likes, setLikes] = useState(0);
@@ -82,17 +115,28 @@ export default function Post(props) {
           </div>
         </div>
         <div className={styles.footer}>
-          <button className={styles.likes} onClick={() => likePost(props.embedId, likes)}>Likes : {likes}</button>
-          <div className={styles.comments}>
-            <span className={styles.comments}>Comments:</span>
-            {comments.map((data, index) => (
-              <div key={index}>
-                <p>
-                  {data.Author} : {data.Text}
-                </p>
-              </div>
-            ))}
-          </div>
+          <span className={styles.likes}>Likes: {likes} By: {author}</span>
+          <span className={styles.comments}>COMMENTS
+          {comments.map((data, index) => (
+            <div key={index}>
+              <p>
+                {data.Author} : {data.Text}
+              </p>
+            </div>
+          ))}
+            <div className={styles.commentForm}>
+            <input
+              type="text"
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              placeholder="Write a comment..."
+              className={styles.commentInput}
+            />
+            <button onClick={handleCommentSubmit} className={styles.commentButton}>
+              Submit Comment
+            </button>
+            </div>
+          </span>
         </div>
       </div>
     </>

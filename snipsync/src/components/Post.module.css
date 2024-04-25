@@ -1,5 +1,6 @@
 .post {
-    border: 5px solid #ccc;
+    border: 2px solid #5D3FD3;
+    border-radius: 4px; 
     padding: 10px;
     margin-bottom: 20px;
   }
@@ -8,10 +9,10 @@
     text-align: center;
   }
   
-  .video-container {
+  .videoResponsive {
     position: relative;
-    width: 100%;
-    padding-bottom: 56.25%; /* Aspect ratio 16:9 */
+    border: 2px solid #5D3FD3;
+    border-radius: 4px; 
   }
   
   .youtube-box {
@@ -23,7 +24,6 @@
   }
   
   .footer {
-    height : 50px;
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
@@ -31,16 +31,39 @@
   
   .likes{
     font-size: 14px;
-    padding: 10px 10px;
-    background-image: linear-gradient(to right,blue, purple);
-    border: #5D3FD3;
   }
 
   .comments{
+    border: 2px solid #5D3FD3;
+    position: relative;
+    width: 600px;
     font-size: 14px;
-    padding-right: 20px;
-    text-align: right;
-    align-self: right;
-    overflow-y: scroll;
+    text-align: left;
+    background-color: black;
   }
-  
+
+  .commentForm {
+    display: flex;
+    flex-direction: column;
+    margin-top: 8px;
+  }
+
+  .commentInput {
+    padding: 8px;
+    margin-bottom: 8px;
+    color: black;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .commentButton {
+    position: relative;
+    width: 200px;
+    padding: 8px 16px;
+    background-color: blue;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    align-self: center
+  }
