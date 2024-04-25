@@ -91,13 +91,16 @@ router.post("/Create/", async (req, res) => {
 });
 
 // This section will help you update a record by id.
-router.patch("/Single/:username", async (req, res) => {
+router.patch("/Single/:id", async (req, res) => {
   try {
-    const query = { username: req.params.username };
+    const query = { _id: new ObjectId(req.params.id) };
     const updates = {
       $set: {
-          password : req.body.password,
-          accountName: req.body.accountName
+        password: crypto.createHmac('sha256', secret)
+        .update(req.body.password)
+        .digest('hex'),
+          username: req.body.username,
+          email : req.body.email
       },
     };
 

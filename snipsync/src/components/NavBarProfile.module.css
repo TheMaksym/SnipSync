@@ -1,0 +1,45 @@
+.miniNav {
+    position: fixed;
+    top: 150px; 
+    left: 30px;
+    width: 100%;
+    max-width: 960px;
+    display: flex;
+    align-items: center;
+    background-image: linear-gradient(to right, #8459f7, #623DCE);
+    padding: 1rem;
+    margin: 0 auto;
+    border-top: 2px solid #5D3FD3;
+    height: 60px;
+    border-radius: 10px;
+}
+
+.navLinks {
+    margin-right: auto;
+}
+
+.nav a {
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+}
+
+.nav a:nth-last-child(2) {
+    margin-right: 30px;
+  }
+
+.miniNavButton {
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #ffffff;
+    margin-right: 10px;
+    border: 2px solid #5D3FD3;
+    background-color: #1A1A1A;
+}
+
+.miniNavButton:hover {
+    border: 2px solid #8459f7;
+    background-color: #8459f7;
+}
+

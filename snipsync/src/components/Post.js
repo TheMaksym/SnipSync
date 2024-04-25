@@ -21,6 +21,7 @@ async function returnPostDetails(embedID) {
         likes: 0,
         comments: [],
       };
+      console.log(data);
       await axios.post("http://localhost:5050/post/", form);
       return form;
     } else {

@@ -42,6 +42,10 @@ export default function LogIn() {
       if (response.status === 403) {
         setError("Login credentials don't add up.");
       } else if (response.status === 200) {
+        localStorage.setItem("username", username);
+        const result = await axios.get("http://localhost:5050/user/single/" + username);
+        localStorage.setItem("access_token", result.data.youtube_token);
+        localStorage.setItem("access_token_twitch", result.data.twitch_token);
         localStorage.setItem("authenticated", true);
         router.push('/dashboard');
       } else {
@@ -50,7 +54,7 @@ export default function LogIn() {
     } catch (error) {
       setError("Failed to connect to the server.");
     }
-  });
+  };
 
   return (
     <>
@@ -97,39 +101,4 @@ export default function LogIn() {
       </div>
     </>
   );
-
-  async function SignIn(username, password) {
-    const requestOptions = {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username,
-        password,
-      }),
-    };
-    const response = await fetch(
-      "http://localhost:5050/User/validate/",
-      requestOptions
-    );
-
-    if (response.status == 403) {
-      console.log(response.statusText);
-      console.log("DENIED");
-      localStorage.setItem("authenticated", false);
-    } else if (response.status == 200) {
-      console.log("Success!");
-      localStorage.setItem("username", username);
-
-      const result = await axios.get("http://localhost:5050/user/single/" + username);
-      localStorage.setItem("access_token", result.data.youtube_token);
-      localStorage.setItem("access_token_twitch", result.data.twitch_token);
-      localStorage.setItem("authenticated", true);
-      push('/dashboard');
-    } else {
-      console.log(response.statusText);
-    }
-  }
 }

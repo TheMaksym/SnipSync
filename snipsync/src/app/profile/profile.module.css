@@ -1,44 +1,85 @@
-.main {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #000000; /* Black background */
-  }
-  
-  .description {
-    text-align: center;
-    color: #FFFFFF; /* White text */
+/* Signup.module.css */
+
+.Home {
     
-  } 
-  
-  .buttonBox {
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column; /* Stack children vertically */
-    align-items: center; /* Center children horizontally */
-    gap: 10px; /* Space between buttons */
-    text-align: center;
-  }
-  
-  /* Button styles */
-  .login, .signup {
-    font-size: 1em; /* Match the font size from the design */
-    padding: 10px 24px; /* Add padding to increase the size of the buttons */
-    border: 2px solid transparent; /* Default border to override for 'Sign Up' */
-    border-radius: 4px; /* Rounded corners */
-    margin: 8px; /* Space between buttons */
-    cursor: pointer; /* Change cursor to pointer on hover */
-    text-decoration: none; /* Remove underline from links */
-    display: inline-block; /* Allow for margins and padding on anchor tags */
-    width: 100%;
-    background-image: linear-gradient(to right,blue, purple);
-    border: #5D3FD3;
-    color: #ffffff;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000; /* Same background color as the login page */
+  padding-top: 250px;
+}
 
-  .login:hover, .signup:hover {
-    background-image:linear-gradient(to left, blue, purple);
+.FormContainer {
+  margin-top:50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center align items for better form presentation */
+  border: 1px solid #623DCE; /* Use the purple color scheme */
+  padding: 20px;
+  width: 50%; /* Adjust width as needed based on design */
+  background-color: #5D3FD3; /* Light background for the form */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Soft shadow for depth */
+  border-radius: 8px; /* Rounded corners for the form container */
+}
 
-  }
+.Content {
+  width: 100%; /* Ensure the content uses the full width of the container */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.h3 {
+  color: #000000; /* Purple color for headings */
+  font-size: 24px;
+  margin: 20px 0;
+  font-weight: 800;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 100%; /* Full width to align with the container */
+  gap: 20px; /* Space between form elements */
+}
+
+.input {
+  padding: 10px;
+  border: 2px solid #623DCE; /* Purple border */
+  border-radius: 4px; /* Rounded corners for the input fields */
+  font-size: 16px; /* Legible font size */
+  width: calc(100% - 24px); /* Full width minus padding */
+  color: #000000;
+}
+
+.submit { /* sign up button*/
+  background-color: #1A1A1A; /* Purple background for consistency */
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-bottom: 15px;
+}
+
+.submit:hover {
+  background-color: #8459f7; /* Darker purple on hover */
+}
+
+.error {
+  color: red;
+  font-size: 14px;
+  margin-top: 0px;
+}
+
+/* Additional link style for consistency */
+.link {
+  color: #ffffff;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}

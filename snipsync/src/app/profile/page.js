@@ -1,70 +1,90 @@
 "use client";
 
+import Navbar from "../../components/Navbar";
+import NavbarProfile from "@/components/NavbarProfile";
 import styles from "./profile.module.css";
+import Image from "next/image";
+
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import axios from "axios";
 
-export default function profile() {
-  const router = useRouter();
-  const [twitchToken, setTwitchToken] = useState("");
-  const [youtubeToken, setYotubeToken] = useState("");
+async function getUserInformation(username) {
+  const result = await axios.get(
+    "http://localhost:5050/user/Single/" + username
+  );
+  return result.data;
+}
 
+async function updateProfile(id, username, password, email){
+  const url = "http://localhost:5050/user/Single/" + id;
+  const body = {
+    username : username,
+    password : password,
+    email : email
+  }
+  const result = await axios.patch(url, body);
+}
+
+export default function Profile() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
+  const [id, setId]= useState("");
   useEffect(() => {
-    setTwitchToken(localStorage.getItem("access_token_twitch"));
-    setYotubeToken(localStorage.getItem("access_token"));
+    const storedName = localStorage.getItem("username");
+    setUsername(storedName);
+    getUserInformation(localStorage.getItem("username")).then((response) => {
+      setEmail(response.email);
+      setPassword(response.password);
+      setId(response._id);
+    });
   }, []);
 
-  function logout() {
-    localStorage.setItem("authenticated", "false");
-    localStorage.setItem("username", "");
-    localStorage.setItem("access_token", "");
-    localStorage.setItem("access_token_twitch", "");
-    router.push("/");
+  const handleSubmit = () => {
+    updateProfile(id, username, password, email);
+    localStorage.setItem("username", username);
   }
 
-  function UnlinkTwitch(){
-    localStorage.setItem("access_token_twitch", "");
-    router.push("/dashboard");
-  }
 
-  function UnlinkYoutube(){
-    localStorage.setItem("access_token", "");
-    router.push("/dashboard");
-  }
 
   return (
-    <>
+    <div className={styles.Home}>
+      <>
+        <Navbar isUserAuthenticated={true} activeLink="dashboard" />
+        <NavbarProfile />
+      </>
       <div className={styles.main}>
-        <p>WIP Profile Page</p>
-        <button className={styles.login} onClick={() => logout()}>
-          Logout
-        </button>
-        {twitchToken === "" ? (
-          <a
-            className={styles.login}
-            href="http://localhost:5050/twitch/user/signin"
-          >
-            Link Twitch
-          </a>
-        ) : (
-          <button className={styles.login} onClick={() => UnlinkTwitch()}>
-          Unlink Twitch
-        </button>
-        )}
-
-        {youtubeToken === "" ? (
-        <a
-          className={styles.login}
-          href="http://localhost:5050/youtube/user/signin"
+        <form
+          className={styles.form}
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSubmit();
+          }}
         >
-          Link Youtube
-        </a>
-        ) : (
-          <button className={styles.login} onClick={() => UnlinkYoutube()}>
-          Unlink Youtube
-        </button>
-        )}
+          <p>Email</p>
+          <input
+            className={styles.input}
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+          <p>Username</p>
+          <input
+            className={styles.input}
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <p>Password</p>
+          <input
+            className={styles.input}
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button className={styles.submit} type="submit">Confirm Profile Changes</button>
+        </form>
       </div>
-    </>
+    </div>
   );
 }

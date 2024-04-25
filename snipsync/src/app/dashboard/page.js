@@ -78,8 +78,8 @@ export default function Dashboard() {
         <div className={styles.Content}>
           <h3 className={styles.h3}>Welcome to your Dashboard</h3>
           <div className={styles.ApiContainers}>
-              {youtubeVideoIds.map((embedId, index) => (
-                <YoutubeBox embedId = {embedId} />
+              {youtubeVideoIds.map((embedId) => (
+                <Post embedId={embedId}></Post>
               ))}
               {twitchStreams.map((channelName) => (
                 <TwitchBox channelName={channelName} />
