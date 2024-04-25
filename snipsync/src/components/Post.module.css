@@ -10,7 +10,6 @@
   }
   
   .videoResponsive {
-    position: relative;
     border: 2px solid #5D3FD3;
     border-radius: 4px; 
   }
@@ -35,7 +34,6 @@
 
   .comments{
     border: 2px solid #5D3FD3;
-    position: relative;
     width: 600px;
     font-size: 14px;
     text-align: left;
@@ -57,7 +55,6 @@
   }
 
   .commentButton {
-    position: relative;
     width: 200px;
     padding: 8px 16px;
     background-color: blue;
