@@ -41,17 +41,39 @@ async function returnPostDetails(embedID) {
   }
 }
 
-
-
 export default function Post(props) {
-
   const [newComment, setNewComment] = useState(""); 
 
+  //Submits new comment
   const handleCommentSubmit = () => {
-    // Logic to post the new comment
+    const url = `http://localhost:5050/post/comments/${props.embedId}`; 
+    const author = localStorage.getItem('username');
+    
+    //Remember, comments have both author, and new comment
+    const newCommentData = {
+      Author: author,
+      Text: newComment
+    };
+    console.log(author);
+    console.log("comment submitted");
     console.log(newComment);
-    setNewComment(""); // Reset the comment input after submission
+    console.log(newCommentData);
+    console.log(comments);
+
+    const updatedComments = [...comments, newCommentData];
+    
+
+    axios.put(url, { comment: newCommentData })
+      .then(response => {
+        console.log('Comment adding was successful!:', response.data);
+        setComments(updatedComments);
+        setNewComment(""); // Clear the input field
+      })
+      .catch(error => {
+        console.error('Could not add comment:', error);
+      });
   };
+
 
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -68,32 +90,47 @@ export default function Post(props) {
   });
 
   return (
-    <div className={styles.postContainer}>
-      <h2 className={styles.videoTitle}>{title}</h2>
-      <YoutubeBox embedId={props.embedId} />
-      <div className={styles.stats}>
-        <span className={styles.likes}>Likes: {likes}</span>
-        <span className={styles.comments}>Comments:</span>
-        {comments.map((data, index) => (
-          <div key={index} className={styles.comment}>
-            <p>
-              {data.Author} : {data.Text}
-            </p>
+    <>
+      <div className={styles.post}>
+        <h2 className="post-title">{title}</h2>
+        <div className="video-container">
+          <div className={styles.videoResponsive}>
+            <iframe
+              width="853"
+              height="480"
+              src={`https://www.youtube.com/embed/${props.embedId}`}
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              title="Embedded youtube"
+            />
           </div>
-        ))}
-        <div className={styles.commentForm}>
-          <input
-            type="text"
-            value={newComment}
-            onChange={(e) => setNewComment(e.target.value)}
-            placeholder="Write a comment..."
-            className={styles.commentInput}
-          />
-          <button onClick={handleCommentSubmit} className={styles.commentButton}>
-            Submit Comment
-          </button>
+        </div>
+        <div className={styles.footer}>
+          <span className={styles.likes}>Likes: {likes} By: {author}</span>
+          <span className={styles.comments}>COMMENTS
+          {comments.map((data, index) => (
+            <div key={index}>
+              <p>
+                {data.Author} : {data.Text}
+              </p>
+            </div>
+          ))}
+            <div className={styles.commentForm}>
+            <input
+              type="text"
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              placeholder="Write a comment..."
+              className={styles.commentInput}
+            />
+            <button onClick={handleCommentSubmit} className={styles.commentButton}>
+              Submit Comment
+            </button>
+            </div>
+          </span>
         </div>
       </div>
-    </div>
+    </>
   );
 }
