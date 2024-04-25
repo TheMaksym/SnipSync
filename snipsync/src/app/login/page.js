@@ -7,6 +7,7 @@ import Navbar from "../../components/Navbar";
 import styles from "./Login.module.css";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import axios from 'axios';
 
 export default function LogIn() {
   const [username, setUsername] = useState("");
@@ -19,7 +20,7 @@ export default function LogIn() {
     if (authenticated) {
       router.push("/dashboard");
     }
-  }, [router]);
+  }, []);
 
   const SignIn = async (username, password) => {
     const requestOptions = {
@@ -41,6 +42,10 @@ export default function LogIn() {
       if (response.status === 403) {
         setError("Login credentials don't add up.");
       } else if (response.status === 200) {
+        localStorage.setItem("username", username);
+        const result = await axios.get("http://localhost:5050/user/single/" + username);
+        localStorage.setItem("access_token", result.data.youtube_token);
+        localStorage.setItem("access_token_twitch", result.data.twitch_token);
         localStorage.setItem("authenticated", true);
         router.push('/dashboard');
       } else {

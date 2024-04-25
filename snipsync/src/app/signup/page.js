@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from "next/image";
 import Navbar from '../../components/Navbar';
 import styles from './Signup.module.css'; // Ensure the CSS module is correctly named and imported
 import Link from 'next/link';
 import {useRouter} from 'next/navigation'
+import axios from 'axios';
 
 export default function SignUp() {
     const [email, setEmail] = useState('');
@@ -15,10 +16,30 @@ export default function SignUp() {
     const [passwordError, setPasswordError] = useState(false);
     const router = useRouter();
 
+    useEffect(() => {
+        const authenticated = localStorage.getItem("authenticated") === "true";
+        if (authenticated) {
+          router.push("/dashboard");
+        }
+      });
+
     const handleSubmit = () => {
         
         if(password === confirmPassword && password.length >= 8) {
             setPasswordError(false);
+
+            const body = {
+                email : email,
+                username : username,
+                password : password
+            }
+            
+            axios.post("http://localhost:5050/user/create/", body);
+
+            localStorage.setItem("authenticated", "true");
+            localStorage.setItem("username", username);
+            localStorage.setItem("access_token", "");
+            localStorage.setItem("access_token_twitch", "");
             router.push('/dashboard')
         } else {
             setPasswordError(true);

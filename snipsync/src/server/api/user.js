@@ -56,7 +56,7 @@ router.post("/validate/", async(req, res) => {
   }
 });
 
-// This section will help you create a new record.
+// This section will help you create a new profile
 router.post("/Create/", async (req, res) => {
   try {
     let newDocument = {
@@ -64,7 +64,11 @@ router.post("/Create/", async (req, res) => {
       password: crypto.createHmac('sha256', secret)
                 .update(req.body.password)
                 .digest('hex'),
-      accountName: req.body.accountName,
+      email: req.body.email,
+      twitch_token: "",
+      youtube_token: "",
+      Likes: [],
+      Comments: []
     };
     
 
@@ -87,13 +91,16 @@ router.post("/Create/", async (req, res) => {
 });
 
 // This section will help you update a record by id.
-router.patch("/Single/:username", async (req, res) => {
+router.patch("/Single/:id", async (req, res) => {
   try {
-    const query = { username: req.params.username };
+    const query = { _id: new ObjectId(req.params.id) };
     const updates = {
       $set: {
-          password : req.body.password,
-          accountName: req.body.accountName
+        password: crypto.createHmac('sha256', secret)
+        .update(req.body.password)
+        .digest('hex'),
+          username: req.body.username,
+          email : req.body.email
       },
     };
 
@@ -126,7 +133,7 @@ router.patch("/Single/Twitch/:username", async (req, res) => {
     const query = { username: req.params.username };
     const updates = {
       $set: {
-          twitch_id: req.body.twitch_id
+          twitch_token: req.body.twitch_token
       },
     };
 
@@ -139,6 +146,23 @@ router.patch("/Single/Twitch/:username", async (req, res) => {
   }
 });
 
+router.patch("/Single/Youtube/:username", async (req, res) => {
+  try {
+    const query = { username: req.params.username };
+    const updates = {
+      $set: {
+          youtube_token: req.body.youtube_token
+      },
+    };
+
+    let collection = await db.collection("User");
+    let result = await collection.updateOne(query, updates);
+    res.send(result).status(200);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Error updating record");
+  }
+});
 router.get("/Single/Twitch/:username", async (req, res) => {
   try {
     const query = { username: req.params.username };
@@ -157,4 +181,30 @@ router.get("/Single/Twitch/:username", async (req, res) => {
   }
 });
 
+//update user comments
+router.patch("/Single/comments/:username", async(req,res) => {
+  const query = { username: req.params.username };
+  const updates = {
+    $push: { 
+      Comments: req.body.comments
+    },
+  };
+  let collection = await db.collection("User");
+  let result = await collection.updateOne(query, updates);
+  res.send(result).status(200);
+})
+
+//update user likes
+router.patch("/Single/likes/:username", async(req,res) => {
+  const query = { username: req.params.username };
+  const updates = {
+    $push: { 
+      Likes : req.body.likes
+    },
+  };
+  console.log(req);
+  let collection = await db.collection("User");
+  let result = await collection.updateOne(query, updates);
+  res.send(result).status(200);
+})
 module.exports = router;

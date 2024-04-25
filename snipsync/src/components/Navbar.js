@@ -51,13 +51,13 @@ export default function Navbar(props) {
           {isUserAuthenticated && (
               <div className={styles.navLinks}>
                   <a href="/dashboard" className={styles.btn_primary}>Dashboard</a>
+                  <a href="/posts" className={styles.btn_primary}>Posts</a>
                   <div className={styles.profileDropdown} ref={dropdownRef}>
                       <button onClick={toggleDropdown} className={styles.btn_primary}>My Profile</button>
                       {dropdownOpen && (
                           <div className={styles.dropdownContent}>
                               <div className={styles.dropdownContent}>
                                 <Link href="/profile">Profile</Link>
-                                <Link href="/settings">Settings</Link>
                                 <button onClick={logout} className={styles.btn_primary_no_border}>
                                   Logout
                                 </button>

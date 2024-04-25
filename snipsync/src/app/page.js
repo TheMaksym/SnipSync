@@ -1,9 +1,21 @@
+"use client";
+
 import Image from "next/image";
 import Navbar from "../components/Navbar";
 import styles from "./Home.module.css";
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Link from 'next/link';  // Ensure Link is imported from 'next/link'
 
 export default function Home() {
+  const { push } = useRouter();
+  useEffect(() => {
+    const authenticated = localStorage.getItem("authenticated") === "true";
+    if (authenticated) {
+      push("/dashboard");
+    }
+  });
+
   return (
     <>
       <Navbar isUserAuthenticated={false} activeLink="home" />
