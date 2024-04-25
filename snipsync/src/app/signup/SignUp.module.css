@@ -6,7 +6,7 @@
     align-items: center;
     justify-content: center;
     background-color: #000000; /* Same background color as the login page */
-    padding-top: 25px;
+    padding-top: 80px;
 }
 
 .FormContainer {
@@ -33,6 +33,7 @@
     color: #000000; /* Purple color for headings */
     font-size: 24px;
     margin: 20px 0;
+    font-weight: 800;
 }
 
 .form {
@@ -54,7 +55,7 @@
 .submit { /* sign up button*/
     background-color: #1A1A1A; /* Purple background for consistency */
     color: white;
-    padding: 10px 20px;
+    padding: 5px 10px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -69,7 +70,7 @@
 .error {
     color: red;
     font-size: 14px;
-    margin-top: 10px;
+    margin-top: 0px;
 }
 
 /* Additional link style for consistency */

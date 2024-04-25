@@ -64,7 +64,8 @@ export default function SignUp() {
                             <input className={styles.input} type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
                             <input className={styles.input} type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                             <input className={styles.input} type="password" placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
-                            {passwordError && <p>Password must be at least 8 characters long and match the confirm password.</p>}
+                            {passwordError &&
+                             (<p className={styles.error}>Password must be at least 8 characters long and match the confirm password.</p>)}
                             <button className={styles.submit} type="submit">Sign Up</button>
                             
                         </form>

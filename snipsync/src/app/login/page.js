@@ -12,18 +12,49 @@ import axios from 'axios';
 export default function LogIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { push } = useRouter();
+  const [error, setError] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
     const authenticated = localStorage.getItem("authenticated") === "true";
     if (authenticated) {
-      push("/dashboard");
+      router.push("/dashboard");
+    }
+  }, []);
+
+  const SignIn = async (username, password) => {
+    const requestOptions = {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username,
+        password,
+      }),
+    };
+    try {
+      const response = await fetch(
+        "http://localhost:5050/User/validate/",
+        requestOptions
+      );
+      if (response.status === 403) {
+        setError("Login credentials don't add up.");
+      } else if (response.status === 200) {
+        localStorage.setItem("authenticated", true);
+        router.push('/dashboard');
+      } else {
+        setError("An unexpected error occurred.");
+      }
+    } catch (error) {
+      setError("Failed to connect to the server.");
     }
   });
 
   return (
     <>
-      <Navbar isUserAuthenticated={false} activeLink="" />
+      <Navbar isUserAuthenticated={false} activeLink="login" />
       <div className={styles.Home}>
         <div className={styles.FormContainer}>
           <div className={styles.Content}>
@@ -34,37 +65,33 @@ export default function LogIn() {
               height={300}
             />
             <h3 className={styles.h3}>SnipSync - Log In</h3>
-            <div>
-              <label className={styles.label} htmlFor="email">
-                Username
-              </label>
+            <form className={styles.form} onSubmit={e => e.preventDefault()}>
               <input
                 className={styles.input}
                 type="text"
-                name="username"
+                placeholder="Username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
-            </div>
-            <div>
-              <label className={styles.label} htmlFor="password">
-                Password
-              </label>
               <input
                 className={styles.input}
                 type="password"
-                name="password"
+                placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-            </div>
-            <button
-              className={styles.submit}
-              type="button"
-              onClick={() => SignIn(username, password)}
-            >
-              Submit
-            </button>
+              {error && <p className={styles.error}>{error}</p>} 
+              <button
+                className={styles.submit}
+                type="button"
+                onClick={() => SignIn(username, password)}
+              >
+                Submit
+              </button>
+            </form>
+            <Link href="/signup" className={styles.link}>
+              Don't have an account? Sign up here.
+            </Link>
           </div>
         </div>
       </div>

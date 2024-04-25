@@ -25,29 +25,39 @@
   .nav a:nth-last-child(2) {
     margin-right: 30px;
   }
-  
   .btn_primary {
     border: 2px solid #5D3FD3;
     background-color: #1A1A1A;
     color: #ffffff;
+    padding: 10px 20px; /* Ensure padding is consistent */
+    font-size: 1em; /* Ensure font size is consistent */
+    border-radius: 4px;
     margin-right: 40px;
-  }
-  
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block; /* Allows for margins and padding */
+    width: auto; /* Adjust width as necessary, or set a specific width */
+}
+
+/* Apply this class specifically if needed to adjust for exact size matching */
+.profileDropdown button {
+    width: 100%; /* Adjust based on your specific needs */
+}
   .btn_primary:hover {
-    border: 2px solid #5D3FD3;
-    background-color: #5D3FD3;
+    border: 2px solid #8459f7;
+    background-color: #8459f7;
   }
   
-  .btn_secondary {
+  .btn_secondary { /* sign up button */
     border: 2px solid #5D3FD3;
     background-color: #1A1A1A;
     color: #ffffff;
     margin-right: 50px;
   }
   
-  .btn_secondary:hover {
-    border: 2px solid #5D3FD3;
-    background-color: #5D3FD3;
+  .btn_secondary:hover { 
+    border: 2px solid #8459f7;
+    background-color: #8459f7;
   }
   
   .link {
@@ -58,3 +68,56 @@
     height: 418;
     width: 429;
   }
+  .profileDropdown {
+    position: relative; /* Needed to position the dropdown content correctly */
+    display: inline-block;
+  }
+  .profileDropdown button {
+    width: 100%; /* Adjust based on your specific needs */
+  }
+  .dropdownContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligns items to the left */
+  width: 100%;
+  padding: 0;
+  box-sizing: border-box;
+  position: absolute;
+  background-color: #000000;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdownContent a {
+  margin: 0;
+  width: 100%;
+  box-sizing: border-box;
+  color: #ffffff; /* White text for high contrast readability */
+  padding: 12px 16px; /* Padding for dropdown items */
+  text-decoration: none; /* No underline */
+  display: block; /* Dropdown items should be block to fill the container */
+}
+
+.dropdownContent a:hover {
+  background-color: #333333;  /* Ensure this is being applied correctly */
+}
+.btn_primary_no_border {
+  display:flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligns items to the left */
+  background-color: #000000;
+  color: #ffffff;
+  padding: 10px 20px;
+  font-size: 1em;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  width: auto;
+  border: none; /* No border for this button */
+}
+
+.btn_primary_no_border:hover {
+  background-color: #333333;
+}
