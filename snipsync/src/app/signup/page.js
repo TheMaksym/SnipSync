@@ -6,6 +6,7 @@ import Navbar from '../../components/Navbar';
 import styles from './Signup.module.css'; // Ensure the CSS module is correctly named and imported
 import Link from 'next/link';
 import {useRouter} from 'next/navigation'
+import axios from 'axios';
 
 export default function SignUp() {
     const [email, setEmail] = useState('');
@@ -21,35 +22,24 @@ export default function SignUp() {
           router.push("/dashboard");
         }
       });
-      
-    //idk if this works or not but this is not a critical issue 
-    // const validatePassword = () => {
-    //     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    //     return regex.test(password);
-    // };
-
-    // const checkPasswordsMatch = () => {
-    //     return password === confirmPassword;
-    // };
-
-    // const handleSubmit = () => {
-    //     if (!validatePassword()) {
-    //         setPasswordError('Password must be at least 8 characters long and include uppercase, lowercase, and special characters.');
-    //         return;
-    //     }
-    //     if (!checkPasswordsMatch()) {
-    //         setPasswordError('Passwords do not match.');
-    //         return;
-    //     }
-    //     setPasswordError('');
-    //     // Process the signup logic here @Connor 
-    // };
-
 
     const handleSubmit = () => {
         
         if(password === confirmPassword && password.length >= 8) {
             setPasswordError(false);
+
+            const body = {
+                email : email,
+                username : username,
+                password : password
+            }
+            
+            axios.post("http://localhost:5050/user/create/", body);
+
+            localStorage.setItem("authenticated", "true");
+            localStorage.setItem("username", username);
+            localStorage.setItem("access_token", "");
+            localStorage.setItem("access_token_twitch", "");
             router.push('/dashboard')
         } else {
             setPasswordError(true);

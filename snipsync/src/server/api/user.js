@@ -66,7 +66,9 @@ router.post("/Create/", async (req, res) => {
                 .digest('hex'),
       email: req.body.email,
       twitch_token: "",
-      youtube_token: ""
+      youtube_token: "",
+      Likes: [],
+      Comments: []
     };
     
 
@@ -197,6 +199,7 @@ router.patch("/Single/likes/:username", async(req,res) => {
       Likes : req.body.likes
     },
   };
+  console.log(req);
   let collection = await db.collection("User");
   let result = await collection.updateOne(query, updates);
   res.send(result).status(200);

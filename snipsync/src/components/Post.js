@@ -41,47 +41,42 @@ async function returnPostDetails(embedID) {
   }
 }
 
-async function likePost(embedID, likes){
-  const body ={
-    likes : likes+1
+async function likePost(embedID, likes, username) {
+  const body = {
+    likes: likes + 1,
+  };
+  const response = await axios.patch(
+    "http://localhost:5050/post/likes/" + embedID,
+    body
+  );
+
+  const Body2 = {
+    embedID
   }
-  const response = await axios.patch("http://localhost:5050/post/likes/"+embedID, body)
-  console.log(response);
+
+  const response2 = await axios.patch("http://localhost:5050/user/Single/likes/" + username, {likes: Body2});
+
 }
 
 export default function Post(props) {
-  const [newComment, setNewComment] = useState(""); 
+  const [newComment, setNewComment] = useState("");
 
   //Submits new comment
   const handleCommentSubmit = () => {
-    const url = `http://localhost:5050/post/comments/${props.embedId}`; 
-    const author = localStorage.getItem('username');
-    
+    const url = `http://localhost:5050/post/comments/${props.embedId}`;
+    const url2 = "http://localhost:5050/user/single/comments/" +localStorage.getItem('username');
+    const author = localStorage.getItem("username");
+
     //Remember, comments have both author, and new comment
     const newCommentData = {
       Author: author,
-      Text: newComment
+      Text: newComment,
     };
-    console.log(author);
-    console.log("comment submitted");
-    console.log(newComment);
-    console.log(newCommentData);
-    console.log(comments);
 
-    const updatedComments = [...comments, newCommentData];
-    
+    axios.patch(url, { comments: newCommentData });
+    axios.patch(url2, {comments: newCommentData});
 
-    axios.put(url, { comment: newCommentData })
-      .then(response => {
-        console.log('Comment adding was successful!:', response.data);
-        setComments(updatedComments);
-        setNewComment(""); // Clear the input field
-      })
-      .catch(error => {
-        console.error('Could not add comment:', error);
-      });
   };
-
 
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -115,26 +110,35 @@ export default function Post(props) {
           </div>
         </div>
         <div className={styles.footer}>
-          <span className={styles.likes}>Likes: {likes} By: {author}</span>
-          <span className={styles.comments}>COMMENTS
-          {comments.map((data, index) => (
-            <div key={index}>
-              <p>
-                {data.Author} : {data.Text}
-              </p>
-            </div>
-          ))}
+          <button
+            className={styles.likes}
+            onClick={() => likePost(props.embedId, likes, localStorage.getItem('username'))}
+          >
+            Likes: {likes}
+          </button>
+          <span className={styles.comments}>
+            COMMENTS
+            {comments.map((data, index) => (
+              <div key={index}>
+                <p>
+                  {data.Author} : {data.Text}
+                </p>
+              </div>
+            ))}
             <div className={styles.commentForm}>
-            <input
-              type="text"
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-              placeholder="Write a comment..."
-              className={styles.commentInput}
-            />
-            <button onClick={handleCommentSubmit} className={styles.commentButton}>
-              Submit Comment
-            </button>
+              <input
+                type="text"
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+                placeholder="Write a comment..."
+                className={styles.commentInput}
+              />
+              <button
+                onClick={handleCommentSubmit}
+                className={styles.commentButton}
+              >
+                Submit Comment
+              </button>
             </div>
           </span>
         </div>
