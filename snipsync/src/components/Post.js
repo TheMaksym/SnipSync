@@ -41,6 +41,14 @@ async function returnPostDetails(embedID) {
   }
 }
 
+async function likePost(embedID, likes){
+  const body ={
+    likes : likes+1
+  }
+  const response = await axios.patch("http://localhost:5050/post/likes/"+embedID, body)
+  console.log(response);
+}
+
 export default function Post(props) {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
@@ -74,15 +82,17 @@ export default function Post(props) {
           </div>
         </div>
         <div className={styles.footer}>
-          <span className={styles.likes}>Likes: {likes}</span>
-          <span className={styles.comments}>Comments:</span>
-          {comments.map((data, index) => (
-            <div key={index}>
-              <p>
-                {data.Author} : {data.Text}
-              </p>
-            </div>
-          ))}
+          <button className={styles.likes} onClick={() => likePost(props.embedId, likes)}>Likes : {likes}</button>
+          <div className={styles.comments}>
+            <span className={styles.comments}>Comments:</span>
+            {comments.map((data, index) => (
+              <div key={index}>
+                <p>
+                  {data.Author} : {data.Text}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>

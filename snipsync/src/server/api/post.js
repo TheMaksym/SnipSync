@@ -33,10 +33,12 @@ router.post("/", async (req, res) => {
 });
 
 //Update post comments
-router.put("/comments/:id", async (req, res) => {
+router.patch("/comments/:id", async (req, res) => {
   const query = { _id: req.params.id };
   const updates = {
-    $push: { Comments: req.body.comment },
+    $push: { 
+      Comments: req.body.comments
+    },
   };
   let collection = await db.collection("Posts");
   let result = await collection.updateOne(query, updates);
@@ -44,10 +46,12 @@ router.put("/comments/:id", async (req, res) => {
 });
 
 //Update post likes
-router.put("/likes/:id", async (req, res) => {
+router.patch("/likes/:id", async (req, res) => {
   const query = { _id: req.params.id };
   const updates = {
-    likes: req.body.likes,
+    $set: {
+        Likes : req.body.likes
+    },
   };
   let collection = await db.collection("Posts");
   let result = await collection.updateOne(query, updates);

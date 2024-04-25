@@ -176,4 +176,29 @@ router.get("/Single/Twitch/:username", async (req, res) => {
   }
 });
 
+//update user comments
+router.patch("/Single/comments/:username", async(req,res) => {
+  const query = { username: req.params.username };
+  const updates = {
+    $push: { 
+      Comments: req.body.comments
+    },
+  };
+  let collection = await db.collection("User");
+  let result = await collection.updateOne(query, updates);
+  res.send(result).status(200);
+})
+
+//update user likes
+router.patch("/Single/likes/:username", async(req,res) => {
+  const query = { username: req.params.username };
+  const updates = {
+    $push: { 
+      Likes : req.body.likes
+    },
+  };
+  let collection = await db.collection("User");
+  let result = await collection.updateOne(query, updates);
+  res.send(result).status(200);
+})
 module.exports = router;
