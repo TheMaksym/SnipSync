@@ -10,8 +10,8 @@ export default function NavbarProfile (props) {
             
                 <div className={styles.navLinks}>
                     <a href="/profile"  className={styles.miniNavButton}>Profile</a>
-                    <a href="/test2"  className={styles.miniNavButton}>test2</a>
-                    <a href="/test3"  className={styles.miniNavButton}>test3</a>
+                    <a href="/account"  className={styles.miniNavButton}>Accounts</a>
+                
 
                 </div>
             

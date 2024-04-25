@@ -1,0 +1,40 @@
+.main {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000; /* Black background */
+  }
+  
+  .description {
+    text-align: center;
+    color: #FFFFFF; /* White text */
+    
+  } 
+  
+  .buttonBox {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center children horizontally */
+    gap: 10px; /* Space between buttons */
+    text-align: center;
+  }
+  
+  /* Button styles */
+  .login, .signup {
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #ffffff;
+    margin-right: 10px;
+    border: 2px solid #5D3FD3;
+    background-color: #5D3FD3;
+  }
+
+  .login:hover, .signup:hover {
+    border: 2px solid #8459f7;
+    background-color: #8459f7;
+
+  }

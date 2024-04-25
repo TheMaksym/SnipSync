@@ -2,85 +2,67 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #000000; /* Same background color as the signup page */
-  padding-top: 80px;
+  background-color: #000000; /* Replace with the background color from your Figma design */
 }
 
 .FormContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: 1px solid #623DCE;
-  padding: 20px;
-  width: 50%;
-  background-color: #5D3FD3;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  border-radius: 8px;
+  display: flex; /* Use flexbox */
+  flex-direction: column; /* Stack children vertically */
+  align-items: flex-start; /* Align children to the start (left side) */
 }
 
 .Content {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin: 150px auto 0; /* Use auto for left and right margins to center the div horizontally */
+  border: 1px solid black;
+  width: 80%; /* Set a width to limit the content and center it */
+  padding: 20px; /* Add some padding for spacing */
 }
 
 .h3 {
-  color: #000000;
-  font-size: 24px;
-  margin: 20px 0;
-  font-weight: 800;
+  margin-top: 10px; /* Add some space between the image and text */
+  margin-bottom: 10px;
+  margin-left: 10px;
+  font-size: 24px; /* Adjust the font size as needed */
+  color: #5D3FD3; /* Adjust the color of the text */
 }
 
 .form {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  gap: 20px;
+  gap: 1rem;
 }
 
 .input {
-  padding: 10px;
-  border: 2px solid #623DCE;
-  border-radius: 4px;
-  font-size: 16px;
-  width: calc(100% - 24px);
+  border: 3px solid #5D3FD3;
+  height: 2rem;
+  box-shadow:  0px 16px 17px #7034a8;
+  color:#000000;
+}
+
+
+.submit {
+  font-size: 1em; /* Match the font size from the design */
+  padding: 10px 24px; /* Add padding to increase the size of the buttons */
+  border: 2px solid transparent; /* Default border to override for 'Sign Up' */
+  margin-top: 8px;
+  cursor: pointer; /* Change cursor to pointer on hover */
+  text-decoration: none; /* Remove underline from links */
+  display: inline-block; /* Allow for margins and padding on anchor tags */
+  width: 100%;
+  background-color: #5D3FD3; /* Green background */
+  color: #ffffff; /* White text */
+  border-radius: 2rem;
+}
+
+.error {
+  color: red;
+}
+
+.back {
+  margin-top: 1rem;
   color: #000000;
 }
 
-.submit {
-  background-color: #1A1A1A;
-  color: white;
-  padding: 5px 10px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin-bottom: 15px;
-}
-
-.submit:hover {
-  background-color: #8459f7;
-}
-
-.link {
-  color: #ffffff;
-  cursor: pointer;
-  text-decoration: none; /* No underline by default */
-  display: block; /* Ensures the link is on its own line */
-  margin-top: 5px; /* Adds space above the link */
-}
-
-.link:hover {
-  text-decoration: underline; /* Underline on hover */
-}
-.success {
-  color: green;
-  font-size: 14px;
-  margin-top: 10px;
-}
-.error {
-  color: red; /* Ensures the text is red */
-  font-size: 14px; /* Adjust size as necessary */
-  margin-top: 0px; /* Spacing above the error message */
+.back:visited {
+  color: #000000;
 }
